@@ -22,3 +22,9 @@ rad.json
 TestResults.xml
 
 .venv
+
+.DS_Store
+
+secrets
+
+.conda
