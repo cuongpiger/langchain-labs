@@ -1,2 +1,4 @@
 langchain-google-vertexai
 langchain-core
+langchain-community
+pypdf
