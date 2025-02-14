@@ -1,10 +1,12 @@
-# 1. VNGCloud Kubernetes Service (VKS) là gì?
+# 1. Giới thiệu về VNGCloud Kubernetes Service - VKS
+
+## 1.1. VNGCloud Kubernetes Service (VKS) là gì?
 VNGCloud Kubernetes Service (hay còn gọi là VKS) là một dịch vụ quản lý Kubernetes được cung cấp bởi VNGCloud. VKS giúp bạn triển khai và quản lý các ứng dụng dựa trên container một cách dễ dàng và hiệu quả. VKS giúp bạn tập trung vào việc phát triển ứng dụng mà không cần quan tâm đến việc quản lý Control Plane của Kubernetes.
 
 VKS (VNGCloud Kubernetes Service) là một dịch vụ được quản lý trên VNGCloud giúp bạn đơn giản hóa quá trình triển khai và quản lý các ứng dụng dựa trên container. Kubernetes là một nền tảng mã nguồn mở được phát triển bởi Google, được sử dụng rộng rãi để quản lý và triển khai các ứng dụng container trên môi trường phân tán.
   ![](https://docs.vngcloud.vn/~gitbook/image?url=https%3A%2F%2F3672463924-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FB0NrrrdJdpYOYzRkbWp5%252Fuploads%252FDdjIxz6yNWoIeaPXHREV%252Fimage.png%3Falt%3Dmedia%26token%3Db32bd47d-452b-4d22-a9ec-91f37cf8bbd9&width=768&dpr=2&quality=100&sign=336f642&sv=2)
 
-# 2. Những điểm nổi bật của VKS <a href="#whatisvks-nhungdiemnoibatcuavks" id="whatisvks-nhungdiemnoibatcuavks"></a>
+## 1.2. Những điểm nổi bật của VKS <a href="#whatisvks-nhungdiemnoibatcuavks" id="whatisvks-nhungdiemnoibatcuavks"></a>
 Những điểm nổi bật của dịch vụ VKS có thể kể đến gồm:
   * **Quản lý Control Plane hoàn toàn tự động (Fully Managed control plane):** VKS sẽ giải phóng bạn khỏi gánh nặng quản lý Control Plane của Kubernetes, giúp bạn tập trung vào việc phát triển ứng dụng.
   * **Hỗ trợ các phiên bản Kubernetes mới nhất:** VKS luôn cập nhật những phiên bản Kubernetes mới nhất (minor version từ 1.27, 1.28, 1.29) để đảm bảo bạn luôn tận dụng được những tính năng tiên tiến nhất.
@@ -20,11 +22,11 @@ Ngoài ra, VKS còn có các ưu điểm sau:
   * **Dễ sử dụng**: VKS cung cấp giao diện đơn giản và dễ sử dụng.
   * **Chi phí hợp lý**: VKS cung cấp mức giá cạnh tranh cho các dịch vụ của mình.
 
-# 3. VKS cung cấp dịch vụ trên các khu vực (region) nào?
+## 1.3. VKS cung cấp dịch vụ trên các khu vực (region) nào?
 
 Hiện tại, trên VKS, chúng tôi đang cung cấp cho bạn 2 cơ sở hạ tầng riêng biệt được đặt tại Hà Nội và Hồ Chí Minh. Bạn có thể lựa chọn sử dụng VKS trên mỗi region tùy thuộc vào vị trí và nhu cầu thực tế của bạn. Đối với 2 farm HCM03, HAN01, các thông số cụ thể cho mỗi region được chúng tôi cung cấp như sau:
   - **Khu vực Hồ Chí Minh (HCM03)**: [https://vks.console.vngcloud.vn](https://vks.console.vngcloud.vn)
   - **Khu vực Hà Nội (HAN01)**: [https://vks-han-1.console.vngcloud.vn](https://vks-han-1.console.vngcloud.vn)
 
-# 4. Tài liệu tham khảo:
+## 1.4. Tài liệu tham khảo:
 Bạn có thể tìm hiểu thêm về VKS tại đường dẫn [https://docs.vngcloud.vn/vng-cloud-document/vn/vks/vks-la-gi](https://docs.vngcloud.vn/vng-cloud-document/vn/vks/vks-la-gi)
