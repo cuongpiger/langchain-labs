@@ -2,7 +2,7 @@
 
 ## 2.1. Network Load Balancer (NLB) là gì?
 
-* **Network Load Balancer** (tên viết tắt là **NLB**) là một bộ cân bằng tải được cung cấp bởi VNGCloud giúp phân phối lưu lượng truy cập mạng đến nhiều máy chủ back-end (backend servers) trong một nhóm máy tính (instance group). NLB hoạt động ở layer 4 của mô hình OSI, giúp cân bằng tải dựa trên địa chỉ IP và cổng TCP/UDP. Để biết thêm thông tin chi tiết về NLB, vui lòng tham khảo tại \[How it works (NLB)]
+* **Network Load Balancer** (tên viết tắt là **NLB**) là một bộ cân bằng tải được cung cấp bởi VNGCloud giúp phân phối lưu lượng truy cập mạng đến nhiều máy chủ back-end (backend servers) trong một nhóm máy tính (instance group). NLB hoạt động ở layer 4 của mô hình OSI, giúp cân bằng tải dựa trên địa chỉ IP và cổng TCP/UDP. Để biết thêm thông tin chi tiết về NLB, vui lòng tham khảo tại [https://docs.vngcloud.vn/vng-cloud-document/vn/vks/network/lam-viec-voi-network-load-balancing-nlb](https://docs.vngcloud.vn/vng-cloud-document/vn/vks/network/lam-viec-voi-network-load-balancing-nlb)
 
 ## 2.2. Mô hình triển khai
 ![](https://docs.vngcloud.vn/~gitbook/image?url=https%3A%2F%2F3672463924-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FB0NrrrdJdpYOYzRkbWp5%252Fuploads%252FVYBtJjEoUNgDi1f5J9vL%252Fimage.png%3Falt%3Dmedia%26token%3D554a2d62-320e-48d1-a884-3c7cce589071&width=768&dpr=2&quality=100&sign=4336a109&sv=2)
@@ -18,11 +18,7 @@ Ngoài ra, người dùng hoàn toàn có thể tự cài đặt plugin **VNGClo
 - **Bước 2**: Khởi tạo hoặc sử dụng một **IAM Service Account** đã có trên **IAM Console** và thiết lập hai policy `vLBFullAccess` và `vServerFullAccess` cho **Service Account** này. Bạn có thể tham khảo cách tạo **Service Account** tại [https://hcm-3.console.vngcloud.vn/iam/service-accounts](https://hcm-3.console.vngcloud.vn/iam/service-accounts). Sau đó, bạn cần lưu lại **Client ID** và **Client Secret** của **Service Account** này.
 - **Bước 3**: Bạn cần cài đặt **Helm 3.0** trên thiết bị của bạn, bạn có thể tham khảo cách cài đặt Helm tại [https://helm.sh/docs/intro/install](https://helm.sh/docs/intro/install). Sau khi `helm` CLI đã được cài đặt thành công, bạn đã có thể dùng `helm` CLI để cài đặt plugin, lưu ý rằng bạn cần thay thế các giá trị **Client ID** và **Client Secret** của **Service Account** vào lệnh dưới đây:
   ```bash
-  helm install vngcloud-load-balancer-controller \
-    oci://vcr.vngcloud.vn/81-vks-public/vks-helm-charts/vngcloud-load-balancer-controller \
-    --namespace kube-system \
-    --set mysecret.global.clientID=__PUT_YOUR_CLIENT_ID__ \
-    --set mysecret.global.clientSecret=__PUT_YOUR_CLIENT_SECRET__
+  helm install vngcloud-load-balancer-controller oci://vcr.vngcloud.vn/81-vks-public/vks-helm-charts/vngcloud-load-balancer-controller --namespace kube-system --set mysecret.global.clientID=__PUT_YOUR_CLIENT_ID__ --set mysecret.global.clientSecret=__PUT_YOUR_CLIENT_SECRET__
   ```
 - **Bước 4**: Sau khi Helm hoàn tất việc cài đặt **VNGCloud LoadBalancer Controller**, bạn có thể kiểm tra xem plugin đã hoạt động hay chưa bằng lệnh:
   ```bash
