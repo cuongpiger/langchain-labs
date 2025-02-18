@@ -6,6 +6,7 @@
 
 ## 2.2. Mô hình triển khai
 ![](https://docs.vngcloud.vn/~gitbook/image?url=https%3A%2F%2F3672463924-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FB0NrrrdJdpYOYzRkbWp5%252Fuploads%252FVYBtJjEoUNgDi1f5J9vL%252Fimage.png%3Falt%3Dmedia%26token%3D554a2d62-320e-48d1-a884-3c7cce589071&width=768&dpr=2&quality=100&sign=4336a109&sv=2)
+_(Đường dẫn đến hình ảnh: [https://docs.vngcloud.vn/~gitbook/image?url=https%3A%2F%2F3672463924-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FB0NrrrdJdpYOYzRkbWp5%252Fuploads%252FVYBtJjEoUNgDi1f5J9vL%252Fimage.png%3Falt%3Dmedia%26token%3D554a2d62-320e-48d1-a884-3c7cce589071&width=768&dpr=2&quality=100&sign=4336a109&sv=2](https://docs.vngcloud.vn/~gitbook/image?url=https%3A%2F%2F3672463924-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FB0NrrrdJdpYOYzRkbWp5%252Fuploads%252FVYBtJjEoUNgDi1f5J9vL%252Fimage.png%3Falt%3Dmedia%26token%3D554a2d62-320e-48d1-a884-3c7cce589071&width=768&dpr=2&quality=100&sign=4336a109&sv=2))_
 * **VNGCloud LoadBalancer Controller**: là một bộ điều khiển (hay còn gọi là **controller**) chạy trên các cụm Kubernetes được triển khai trên VNGCloud. Controller này chịu trách nhiệm:
   * **Quản lý các Network Load Balancer (NLB)** cho các Service của Kubernetes có thuộc tính `serviceType` là `LoadBalancer`.
   * **Điều phối lưu lượng mạng** đến các `pod` trên worker node của bạn.
@@ -200,6 +201,69 @@ Bạn có thể tùy chỉnh hoặc cấu hình NLB phù hợp với nhu cầu c
   - `vks.vngcloud.vn/package-id`:
     - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
     - Ý nghĩa: Dùng để thiết lập package của NLB. Nếu không được thiết lập, mặc định sẽ sử dụng cấu hình **NLB Small**. Ngoài ra, bạn cũng có thể dùng annotation này để cấu hình lại package của NLB hiện tại.
+  - `vks.vngcloud.vn/tags`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Tiến hành gắn thẻ cho NLB của bạn. Thẻ này bao gồm các cặp **key-value** nhằm giúp bạn dễ dàng quản lí các NLB trên **VNGCloud Portal**.
+  - `vks.vngcloud.vn/scheme`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Bao gồm 2 giá trị là `internet-facing` và `internal`. Nếu giá trị của annotation này là `internet-facing`, NLB sẽ được cấu hình để truy cập từ Internet. Nếu giá trị của annotation này là `internal`, NLB sẽ được cấu hình để truy cập từ mạng nội bộ.
+  - `vks.vngcloud.vn/security-groups`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Mặc định, **VNGCloud LoadBalancer Controller** sẽ tự động tạo một **Security Group** mới cho NLB của bạn. Tuy nhiên, nếu bạn muốn sử dụng một **Security Group** đã có, bạn có thể sử dụng annotation này để thiết lập **Security Group** cho NLB của bạn. Ví dụ: `vks.vngcloud.vn/security-groups: secg-303d9c91-f4b2-400d-8e81-12039167da0c`. Ngoài ra, bạn cũng có thể cấu hình nhiều **Security Group** cho NLB của bạn bằng cách sử dụng dấu phẩy `,` để ngăn cách giữa các **Security Group**. Ví dụ: `vks.vngcloud.vn/security-groups: secg-303d9c91-f4b2-400d-8e81-12039167da0c,secg-303d9c91-f4b2-400d-8e81-12039167da0d`.
+  - `vks.vngcloud.vn/inbound-cidrs`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Mặc định, NLB sẽ được cấu hình để truy cập từ mọi địa chỉ IP. Tuy nhiên, nếu bạn muốn cấu hình NLB để chỉ cho phép truy cập từ một số địa chỉ IP cụ thể, bạn có thể sử dụng annotation này. Ví dụ: `vks.vngcloud.vn/inbound-cidrs: 183.23.23.13`. Ngoài ra, bạn cũng có thể cấu hình nhiều địa chỉ IP cho NLB của bạn bằng cách sử dụng dấu phẩy `,` để ngăn cách giữa các địa chỉ IP. Ví dụ: `vks.vngcloud.vn/inbound-cidrs: 183.23.23.13,183.23.23.23`.
+  - `vks.vngcloud.vn/healthy-threshold-count`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là ngưỡng số lần liên tiếp mà một máy chủ back-end phải trả về trạng thái `healthy` để được coi là **HEALTHY**. Mặc định, giá trị của annotation này là `3`.
+  - `vks.vngcloud.vn/unhealthy-threshold-count`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là ngưỡng số lần liên tiếp mà một máy chủ back-end phải trả về trạng thái `unhealthy` để được coi là **UNHEALTHY**. Mặc định, giá trị của annotation này là `3`.
+  - `vks.vngcloud.vn/healthcheck-interval-seconds`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là khoảng thời gian giữa các lần kiểm tra sức khỏe của máy chủ back-end. Mặc định, giá trị của annotation này là `30` giây.
+  - `vks.vngcloud.vn/healthcheck-timeout-seconds`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là thời gian tối đa mà một máy chủ back-end phải trả về trạng thái `healthy` hoặc `unhealthy`. Mặc định, giá trị của annotation này là `5` giây.
+  - `vks.vngcloud.vn/healthcheck-protocol`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là giao thức sử dụng để kiểm tra sức khỏe của máy chủ back-end. Mặc định, giá trị của annotation này là `TCP`. Ngoài ra, một vài giá trị khác mà bạn có thể sử dụng là `PING-UDP`, `HTTP`, `HTTPS`.
+  - `vks.vngcloud.vn/healthcheck-http-method`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là phương thức HTTP sử dụng để kiểm tra sức khỏe của máy chủ back-end. Mặc định, giá trị của annotation này là `GET`. Ngoài ra, một vài giá trị khác mà bạn có thể sử dụng là `PUT`, `POST`. Lưu ý rằng annotation này chỉ có tác dụng khi `vks.vngcloud.vn/healthcheck-protocol` được thiết lập là `HTTP` hoặc `HTTPS`.
+  - `vks.vngcloud.vn/healthcheck-path`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là đường dẫn sử dụng để kiểm tra sức khỏe của máy chủ back-end. Mặc định, giá trị của annotation này là `/`. Lưu ý rằng annotation này chỉ có tác dụng khi `vks.vngcloud.vn/healthcheck-protocol` được thiết lập là `HTTP` hoặc `HTTPS`.
+  - `vks.vngcloud.vn/healthcheck-http-version`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là phiên bản HTTP sử dụng để kiểm tra sức khỏe của máy chủ back-end. Mặc định, giá trị của annotation này là `1.0`. Ngoài ra bạn cũng có thể sử dụng giá trị `1.1` khi cần thiết. Lưu ý rằng annotation này chỉ có tác dụng khi `vks.vngcloud.vn/healthcheck-protocol` được thiết lập là `HTTP` hoặc `HTTPS`.
+  - `vks.vngcloud.vn/healthcheck-http-domain-name`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là tên miền sử dụng để kiểm tra sức khỏe của máy chủ back-end. Mặc định, giá trị của annotation này là **RỖNG**. Lưu ý rằng annotation này chỉ có tác dụng khi `vks.vngcloud.vn/healthcheck-protocol` được thiết lập là `HTTP` hoặc `HTTPS`.
+  - `vks.vngcloud.vn/healthcheck-port`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là cổng sử dụng để kiểm tra sức khỏe của máy chủ back-end. Mặc định, giá trị của annotation này sẽ lấy theo trường `port` của tài nguyên `Service` cần dùng NLB này. Lưu ý rằng annotation này chỉ có tác dụng khi `vks.vngcloud.vn/healthcheck-protocol` được thiết lập là `HTTP` hoặc `HTTPS`.
+  - `vks.vngcloud.vn/success-codes`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là mã trạng thái HTTP sẽ được coi là thành công khi kiểm tra sức khỏe của máy chủ back-end. Mặc định, giá trị của annotation này là `200`. Lưu ý rằng annotation này chỉ có tác dụng khi `vks.vngcloud.vn/healthcheck-protocol` được thiết lập là `HTTP` hoặc `HTTPS`.
+  - `vks.vngcloud.vn/idle-timeout-client`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là thời gian tối đa mà một kết nối từ client có thể không hoạt động trước khi bị đóng. Mặc định, giá trị của annotation này là `50` giây.
+  - `vks.vngcloud.vn/idle-timeout-member`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là thời gian tối đa mà một kết nối từ máy chủ back-end có thể không hoạt động trước khi bị đóng. Mặc định, giá trị của annotation này là `50` giây.
+  - `vks.vngcloud.vn/idle-timeout-connection`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là thời gian tối đa mà một kết nối giữa NLB và máy chủ back-end có thể không hoạt động trước khi bị đóng. Mặc định, giá trị của annotation này là `5` giây.
+  - `vks.vngcloud.vn/pool-algorithm`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Là thuật toán cân bằng tải sẽ được sử dụng cho NLB. Mặc định, giá trị của annotation này là `ROUND_ROBIN`. Ngoài ra, một vài giá trị khác mà bạn có thể sử dụng là `SOURCE_IP`, `LEAST_CONNECTIONS`.
+  - `vks.vngcloud.vn/target-node-labels`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Mặc định **VNGCloud LoadBalancer Controller** sẽ chọn toàn bộ các node trong cluster để thêm vào pool của NLB. Tuy nhiên, nếu bạn muốn chỉ chọn một số node cụ thể, bạn có thể sử dụng annotation này. Ví dụ: `vks.vngcloud.vn/target-node-labels: node-role.kubernetes.io/worker=true`. Lưu ý rằng bạn cũng có thể cấu hình nhiều node cho NLB của bạn bằng cách sử dụng dấu phẩy `,` để ngăn cách giữa các node. Ví dụ: `vks.vngcloud.vn/target-node-labels: node-role.kubernetes.io/worker=true,node-role.kubernetes.io/worker=false`.
+  - `vks.vngcloud.vn/enable-proxy-protocol`:
+    - Bắt buộc phải có trong spec của tài nguyên `Service`: Không bắt buộc
+    - Ý nghĩa: Mặc định, giá trị của annotation này là **RỖNG**. Bạn cần chỉ định danh sách các **Service Port Name** _(trong tài nguyên `Service`, bạn có thể chỉ định nhiều Service Port, mỗi Service Port này bạn cần cấu hình thuộc tính `name` cho chúng để sử dụng tính năng này)_ mà Proxy Protocol sẽ được kích hoạt. Ví dụ: `vks.vngcloud.vn/enable-proxy-protocol: service_port_name_1,service_port_name_2`. Hoặc nếu bạn muốn kích hoạt Proxy Protocol cho tất cả các Service Port, bạn có thể sử dụng giá trị `*`. Ví dụ: `vks.vngcloud.vn/enable-proxy-protocol: "*"`.
 
 ## 2.6. Những hạn chế của NLB trên VKS
 * Một NLB có thể được sử dụng chung cho nhiều cluster nhưng phải đảm bảo các cluster này có chung một **VPC**.
