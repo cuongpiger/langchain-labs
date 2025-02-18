@@ -6,7 +6,6 @@
 
 ## 2.2. Mô hình triển khai
 ![](https://docs.vngcloud.vn/~gitbook/image?url=https%3A%2F%2F3672463924-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FB0NrrrdJdpYOYzRkbWp5%252Fuploads%252FVYBtJjEoUNgDi1f5J9vL%252Fimage.png%3Falt%3Dmedia%26token%3D554a2d62-320e-48d1-a884-3c7cce589071&width=768&dpr=2&quality=100&sign=4336a109&sv=2)
-_(Đường dẫn đến hình ảnh: [https://docs.vngcloud.vn/~gitbook/image?url=https%3A%2F%2F3672463924-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FB0NrrrdJdpYOYzRkbWp5%252Fuploads%252FVYBtJjEoUNgDi1f5J9vL%252Fimage.png%3Falt%3Dmedia%26token%3D554a2d62-320e-48d1-a884-3c7cce589071&width=768&dpr=2&quality=100&sign=4336a109&sv=2](https://docs.vngcloud.vn/~gitbook/image?url=https%3A%2F%2F3672463924-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FB0NrrrdJdpYOYzRkbWp5%252Fuploads%252FVYBtJjEoUNgDi1f5J9vL%252Fimage.png%3Falt%3Dmedia%26token%3D554a2d62-320e-48d1-a884-3c7cce589071&width=768&dpr=2&quality=100&sign=4336a109&sv=2))_
 * **VNGCloud LoadBalancer Controller**: là một bộ điều khiển (hay còn gọi là **controller**) chạy trên các cụm Kubernetes được triển khai trên VNGCloud. Controller này chịu trách nhiệm:
   * **Quản lý các Network Load Balancer (NLB)** cho các Service của Kubernetes có thuộc tính `serviceType` là `LoadBalancer`.
   * **Điều phối lưu lượng mạng** đến các `pod` trên worker node của bạn.
