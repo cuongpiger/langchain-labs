@@ -2,6 +2,7 @@ from enum import Enum
 from langchain_core.pydantic_v1 import BaseModel, Field
 
 from langchain import PromptTemplate
+from langchain_community.document_loaders import PyPDFLoader
 
 
 
@@ -156,3 +157,26 @@ def answer_question_from_context(question, context, question_answer_from_context
     output = question_answer_from_context_chain.invoke(input_data)
     answer = output.answer_based_on_content
     return {"answer": answer, "context": context, "question": question}
+
+
+def read_pdf_to_string(path):
+    """
+    Read a PDF document from the specified path and return its content as a string.
+
+    Args:
+        path (str): The file path to the PDF document.
+
+    Returns:
+        str: The concatenated text content of all pages in the PDF document.
+
+    The function uses the 'fitz' library (PyMuPDF) to open the PDF document, iterate over each page,
+    extract the text content from each page, and append it to a single string.
+    """
+    loader = PyPDFLoader(path)
+    documents = loader.load()
+    
+    text = ""
+    for doc in documents:
+        text += doc.page_content
+        
+    return text
