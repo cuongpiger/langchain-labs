@@ -177,6 +177,6 @@ def read_pdf_to_string(path):
     
     text = ""
     for doc in documents:
-        text += doc.page_content
+        text += f"\n{doc.page_content}"
         
     return text
