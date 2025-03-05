@@ -1,20 +1,22 @@
 # Khởi tạo một Public Cluster với Public Node Group
 
-### Điều kiện cần <a href="#khoitaomotpublicclustervoipublicnodegroup-dieukiencan" id="khoitaomotpublicclustervoipublicnodegroup-dieukiencan"></a>
+## 1. Điều kiện cần
 
 Để có thể khởi tạo một **Cluster** và **Deploy** một **Workload**, bạn cần:
 
-* Có ít nhất 1 **VPC** và 1 **Subnet** đang ở trạng thái **ACTIVE**. Nếu bạn chưa có VPC, Subnet nào, vui lòng khởi tạo VPC, Subnet theo hướng dẫn tại [đây.](../../../vserver/compute-hcm03-1a/network/virtual-private-cloud-vpc/)&#x20;
-* Có ít nhất 1 **SSH** key đang ở trạng thái **ACTIVE**. Nếu bạn chưa có SSH key nào, vui lòng khởi tạo SSH key theo hướng dẫn tại [đây.](../../../vserver/compute-hcm03-1a/security/ssh-key-bo-khoa.md)
+* Có ít nhất 1 **VPC** và 1 **Subnet** đang ở trạng thái **ACTIVE**. Nếu bạn chưa có VPC, Subnet nào, vui lòng khởi tạo VPC, Subnet theo hướng dẫn tại [đây.](broken-reference)&#x20;
+* Có ít nhất 1 **SSH** key đang ở trạng thái **ACTIVE**. Nếu bạn chưa có SSH key nào, vui lòng khởi tạo SSH key theo hướng dẫn tại [đây.](broken-reference)
 * Đã cài đặt và cấu hình **kubectl** trên thiết bị của bạn. vui lòng tham khảo tại [đây](https://kubernetes.io/vi/docs/tasks/tools/install-kubectl/) nếu bạn chưa rõ cách cài đặt và sử dụng kuberctl. Ngoài ra, bạn không nên sử dụng phiên bản kubectl quá cũ, chúng tôi khuyến cáo bạn nên sử dụng phiên bản kubectl sai lệch không quá một phiên bản với version của cluster.
 
 ***
 
-### Khởi tạo Cluster <a href="#khoitaomotpublicclustervoipublicnodegroup-khoitaocluster" id="khoitaomotpublicclustervoipublicnodegroup-khoitaocluster"></a>
+## 2. Khởi tạo Cluster
+
+### 2.1. Định nghĩa về Cluster
 
 **Cluster trong Kubernetes** là một tập hợp gồm một hoặc nhiều máy ảo (VM) được kết nối lại với nhau để chạy các ứng dụng được đóng gói dạng container. Cluster cung cấp một môi trường thống nhất để triển khai, quản lý và vận hành các container trên quy mô lớn.
 
-Để khởi tạo một Cluster, hãy làm theo các bước bên dưới:
+### 2.2. Các bước khởi tạo Cluster
 
 **Bước 1:** Truy cập vào [https://vks.console.vngcloud.vn/overview](https://vks.console.vngcloud.vn/overview)
 
@@ -30,13 +32,13 @@
 
 ***
 
-### Kết nối và kiểm tra thông tin Cluster vừa tạo <a href="#khoitaomotpublicclustervoipublicnodegroup-ketnoivakiemtrathongtinclustervuatao" id="khoitaomotpublicclustervoipublicnodegroup-ketnoivakiemtrathongtinclustervuatao"></a>
+## 3. Kết nối và kiểm tra thông tin Cluster
 
 Sau khi Cluster được khởi tạo thành công, bạn có thể thực hiện kết nối và kiểm tra thông tin Cluster vừa tạo theo các bước:&#x20;
 
 **Bước 1:** Truy cập vào [https://vks.console.vngcloud.vn/k8s-cluster](https://vks.console-dev.vngcloud.tech/overview)
 
-**Bước 2:** Danh sách Cluster được hiển thị, chọn biểu tượng <img src="https://docs-admin.vngcloud.vn/download/thumbnails/73761995/image2024-4-4_14-37-11.png?version=1&#x26;modificationDate=1712216232000&#x26;api=v2" alt="" data-size="line"> và chọn **Download Config File** để thực hiện tải xuống file kubeconfig. File này sẽ giúp bạn có toàn quyền truy cập vào Cluster của bạn.
+**Bước 2:** Danh sách Cluster được hiển thị, chọn biểu tượng **Action** và chọn **Download Config File** để thực hiện tải xuống file kubeconfig. File này sẽ giúp bạn có toàn quyền truy cập vào Cluster của bạn.
 
 **Bước 3**: Đổi tên file này thành config và lưu nó vào thư mục **\~/.kube/config**
 
@@ -59,13 +61,13 @@ ng-0f4ed631-1252-49f7-8dfc-386fa0b2d29b-a8ef0   Ready      <none>   28m   v1.28.
 
 ***
 
-### Deploy một Workload <a href="#khoitaomotpublicclustervoipublicnodegroup-deploymotworkload" id="khoitaomotpublicclustervoipublicnodegroup-deploymotworkload"></a>
+## 4. Deploy một Workload
 
-Sau đây là hướng dẫn để bạn deploy service nginx trên Kubernetes.
+Dưới đây là hướng dẫn deploy **Nginx** trên Kubernetes.
 
-**Bước 1**: **Tạo Deployment và Service cho Nginx app**
+### 4.1. Tạo Deployment và Service
 
-* Tạo file **nginx-service.yaml** với nội dung sau:
+#### Bước 1: Tạo file `nginx-service.yaml`
 
 ```
 apiVersion: apps/v1
@@ -94,81 +96,61 @@ metadata:
   name: nginx-service
 spec:
   selector:
-    app: nginx 
+    app: nginx
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
 ```
 
-* Deploy Deployment này bằng lệch:&#x20;
+Triển khai bằng lệnh:
 
 ```
 kubectl apply -f nginx-service.yaml
 ```
 
-***
+#### Bước 2: Kiểm tra trạng thái Deployment và Service
 
-**Bước 2: Kiểm tra thông tin Deployment, Service trước khi expose ra Internet.**
-
-* Chạy câu lệnh sau đây để kiểm tra **Deployment**
+Chạy lệnh:
 
 ```
 kubectl get svc,deploy,pod -owide
 ```
 
-* Nếu kết quả trả về như bên dưới tức là bạn đã deploy service nginx thành công.
+Nếu kết quả hiển thị thông tin **Deployment** và **Service**, tức là bạn đã deploy **nginx** thành công.
 
-```
-NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE    SELECTOR
-service/kubernetes      ClusterIP   10.96.0.1       <none>        443/TCP   2d4h   <none>
-service/nginx-service   ClusterIP   10.96.178.229   <none>        80/TCP    74s    app=nginx
+***
 
-NAME                        READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES         SELECTOR
-deployment.apps/nginx-app   1/1     1            1           74s   nginx        nginx:1.19.1   app=nginx
+## 5. Expose Nginx Service ra Internet
 
-NAME                             READY   STATUS    RESTARTS   AGE   IP              NODE                                            NOMINATED NODE   READINESS GATES
-pod/nginx-app-7f45b65946-5pcvz   1/1     Running   0          74s   172.16.24.201   ng-3f06013a-f6a5-47ba-a51f-bc5e9c2b10a7-ecea1   <none>           <none>
-```
-
-### **Expose Nginx Service ra Internet**
-
-* Chạy câu lệnh sau đây để expose nginx-service ra internet:
+Chạy lệnh sau để **expose** service ra internet:
 
 ```
 kubectl expose deployment nginx-app --type=NodePort --port=30080 --target-port=80
 ```
 
-* Nếu kết quả trả về như bên dưới tức là bạn đã expose Service ra Internet thành công.
+Nếu kết quả hiển thị service với **NodePort**, tức là bạn đã expose thành công.
+
+### 5.1. Truy cập ứng dụng
+
+Truy cập ứng dụng theo địa chỉ:
 
 ```
-NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)           AGE     SELECTOR
-service/kubernetes      ClusterIP   10.96.0.1       <none>        443/TCP           2d4h    <none>
-service/nginx-app       NodePort    10.96.215.192   <none>        30080:31289/TCP   4s      app=nginx
-service/nginx-service   ClusterIP   10.96.178.229   <none>        80/TCP            2m43s   app=nginx
-
-NAME                        READY   UP-TO-DATE   AVAILABLE   AGE     CONTAINERS   IMAGES         SELECTOR
-deployment.apps/nginx-app   1/1     1            1           2m43s   nginx        nginx:1.19.1   app=nginx
-
-NAME                             READY   STATUS    RESTARTS   AGE     IP              NODE                                            NOMINATED NODE   READINESS GATES
-pod/nginx-app-7f45b65946-5pcvz   1/1     Running   0          2m43s   172.16.24.201   ng-3f06013a-f6a5-47ba-a51f-bc5e9c2b10a7-ecea1   <none>           <none
+http://<node_ip>:<node_port>/
 ```
 
-***
+* **node\_ip**: Địa chỉ **External IP** của bất kỳ **node** nào trong cluster.
+* **node\_port**: Cổng được hiển thị trong danh sách service.
 
-**Để truy cập vào app nginx vừa export, bạn có thể sử dụng URL với định dạng:**
+Bạn có thể lấy **External IP** của node tại giao diện **vServer**: [vServer Console](https://hcm-3.console.vngcloud.vn/vserver/v-server/cloud-server).
+
+Ví dụ, nếu **node\_ip** là `61.28.231.65` và **node\_port** là `31007`, bạn có thể truy cập ứng dụng bằng đường dẫn:
 
 ```
-http://<node_ip>:31289/
+http://61.28.231.65:31007/
 ```
 
-Trong đó node\_ip có thể là địa chỉ node\_port của bất kỳ node nào trong cluster. Bạn có thể lấy thông tin External IP của Node tại giao diện vServer. Cụ thể truy cập tại [https://hcm-3.console.vngcloud.vn/vserver/v-server/cloud-server](https://hcm-3.console.vngcloud.vn/vserver/v-server/cloud-server).
+Nếu bạn muốn expose service này thông qua **vLB Layer4** hoặc **vLB Layer7**, vui lòng tham khảo hướng dẫn:
 
-Ví dụ, bên dưới tôi đã truy cập thành công vào app nginx với địa chỉ : [http://61.28.231.65:31007/](http://61.28.231.65:31007/)
-
-<figure><img src="../../../.gitbook/assets/image (702).png" alt=""><figcaption></figcaption></figure>
-
-Nếu bạn muốn expose service này thông qua vLB Layer4, vLB Layer7, vui lòng tham khảo tại:&#x20;
-
-* [Expose một service thông qua vLB Layer4](../expose-mot-service-thong-qua-vlb-layer4/)
-* [Expose một service thông qua vLB Layer7](../expose-mot-service-thong-qua-vlb-layer7.md)
+* **Expose một service thông qua vLB Layer4**
+* **Expose một service thông qua vLB Layer7**

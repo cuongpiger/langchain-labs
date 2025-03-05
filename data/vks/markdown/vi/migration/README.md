@@ -8,13 +8,13 @@ Migration từ một cluster sang một cluster là quá trình chuyển dữ li
 
 ### Mô hình tổng quan
 
-<figure><img src="../../.gitbook/assets/image (299).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (720).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
 ### Các bước thực hiện
 
-<figure><img src="../../.gitbook/assets/image (307).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (728).png" alt=""><figcaption></figcaption></figure>
 
 Cụ thể:&#x20;
 

@@ -1,6 +1,6 @@
 # Security Group
 
-Security Group đóng vai trò như một firewall giúp bạn kiểm soát lưu lượng truy cập ra vào máy chủ (VM). Trên hệ thống VKS, để đảm bảo cluster hoạt động an toàn và hiệu quả, các Security Group mặc định được thiết lập để cho phép các truy cập cần thiết cho hoạt động nội bộ của cluster. Việc tự động tạo Security Group giúp đơn giản hóa quá trình triển khai cluster và đảm bảo rằng cluster được bảo vệ ngay từ đầu. Cụ thể, khi bạn thực hiện khởi tạo một Cluser, chúng tôi sẽ tự động khởi tạo một vài Security Group với các thông số như sau:&#x20;
+Security Group đóng vai trò như một firewall giúp bạn kiểm soát lưu lượng truy cập ra vào máy chủ (VM). Trên hệ thống VKS, để đảm bảo cluster hoạt động an toàn và hiệu quả, các Security Group mặc định được thiết lập để cho phép các truy cập cần thiết cho hoạt động nội bộ của cluster. Việc tự động tạo Security Group giúp đơn giản hóa quá trình triển khai cluster và đảm bảo rằng cluster được bảo vệ ngay từ đầu. Cụ thể, khi bạn thực hiện khởi tạo một Cluser, chúng tôi sẽ tự động khởi tạo một vài Security Group với các thông số như sau:
 
 ### Security group mặc định được tạo tự động cho tất cả Cluster
 
@@ -14,7 +14,7 @@ Mỗi Cluster được tạo ra trong hệ thống VKS, chúng tôi sẽ tự đ
 
 <table><thead><tr><th width="114">Protocol</th><th width="131">Ether type</th><th width="126">Port range</th><th width="125">Destination</th><th>Ý nghĩa</th></tr></thead><tbody><tr><td>ANY</td><td>IPv4</td><td>0-65535</td><td>0.0.0.0/0</td><td>Rule mặc định của tất cả Security group</td></tr><tr><td>ANY</td><td>IPv6</td><td>0-65535</td><td>::/0</td><td>Rule mặc định của tất cả Security group</td></tr></tbody></table>
 
-### Security group được tạo tự động bởi VNGCLOUD LoadBalancer Controller&#x20;
+### Security group được tạo tự động bởi VNGCLOUD LoadBalancer Controller
 
 Khi bạn sử dụng VNGCloud LoadBalancer Controller để tích hợp Network Load Balancer với Cluster trên hệ thống VKS, chúng tôi sẽ tự động tạo một Security Group. Security group này sẽ bao gồm:
 

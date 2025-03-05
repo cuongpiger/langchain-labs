@@ -2,22 +2,19 @@
 
 Sử dụng hướng dẫn bên dưới dể làm việc với Private Node group thông qua Pfsense
 
-## Điều kiện cần
+## 1. Điều kiện cần
 
 Để có thể sử dụng Pfsense làm NAT Gateway cho Cluster trên hệ thống VKS, bạn cần có:
 
 * Một **server (VM) Pfsense** được khởi tạo trên hệ thống **vMarketPlace** theo hướng dẫn bên dưới với cấu hình như sau:
-
-| Item                 | Cấu hình     |
-| -------------------- | ------------ |
-| Flavor               | 2x4          |
-| Volume               | 80 GB        |
-| VPC                  | 10.3.0.0/16  |
-| Network Interface 1  | 10.3.0.3     |
+  * Flavor: 2x4
+  * Volume: 80 GB
+  * VPC: 10.3.0.0/16
+  * Network Interface 1: 10.3.0.3
 
 ***
 
-## Khởi tạo Pfsense
+## 2. Khởi tạo Pfsense
 
 **Bước 1:** Truy cập vào [https://marketplace.console.vngcloud.vn/](https://marketplace.console.vngcloud.vn/)
 
@@ -29,11 +26,11 @@ Sử dụng hướng dẫn bên dưới dể làm việc với Private Node grou
 
 ***
 
-## Cấu hình thông số cho Pfsense <a href="#toc165621058" id="toc165621058"></a>
+## 3. Cấu hình thông số cho Pfsense <a href="#toc165621058" id="toc165621058"></a>
 
 **Bước 1:** Sau khi khởi tạo Pfsense từ vMarketPlace theo hướng dẫn bên trên, bạn có thể truy cập vào giao diện vServer tại [đây](https://hcm-3.console.vngcloud.vn/vserver/v-server/cloud-server) để kiểm tra server chạy Pfsense đã được khởi tạo xong chưa. <mark style="color:red;">**Tiếp theo, bạn mở rule Any trên Security Group cho server Pfsense vừa tạo. Việc mở rule Any trên Security Group sẽ cho phép tất cả lưu lượng truy cập đến server Pfsense.**</mark>
 
-<figure><img src="../../../../.gitbook/assets/image (501).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (921).png" alt=""><figcaption></figcaption></figure>
 
 **Bước 2: Sau khi server chạy Pfsense được khởi tạo thành công**. Để vào GUI của Pfsense, bạn cần sử dụng địa chỉ IP của External Interface đăng nhập với Tên đăng nhập và mật khẩu mặc định là **admin/pfsense.**&#x20;
 
@@ -41,13 +38,13 @@ Sử dụng hướng dẫn bên dưới dể làm việc với Private Node grou
 
 * Để lấy thông tin IP này, bạn vào phần **Network Interface** của **Pfsense** để xem thông tin
 
-<figure><img src="../../../../.gitbook/assets/image (30).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (409).png" alt=""><figcaption></figcaption></figure>
 
 **Bước 3**: Mở **rule** trên **firewall**
 
 * Tiến hành **Add rule**
 
-<figure><img src="../../../../.gitbook/assets/image (9) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (388).png" alt=""><figcaption></figcaption></figure>
 
 * Bạn có thể mở rule như bên dưới để truy cập vào GUI bằng **External Interface**.
 
@@ -57,108 +54,108 @@ Sử dụng hướng dẫn bên dưới dể làm việc với Private Node grou
 * Bạn nên giới hạn lại Range IP được phép kết nối tới GUI Pfsense để hạn chế user được phép truy cập vào GUI Pfsense
 {% endhint %}
 
-<figure><img src="../../../../.gitbook/assets/image (10) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (389).png" alt=""><figcaption></figcaption></figure>
 
 * Chọn **Save**
 * Sau đó chọn **Apply change**
 
 **Bước 4**: Tiến hành **General Setup**, bạn vui lòng thực hiện như bên dưới
 
-<figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (380).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (381).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (382).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (383).png" alt=""><figcaption></figcaption></figure>
 
 * Cấu hình cho **WAN Interface**
 
-<figure><img src="../../../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (384).png" alt=""><figcaption></figcaption></figure>
 
 * Thay đổi **password** vào **GUI**
 
-<figure><img src="../../../../.gitbook/assets/image (6) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (385).png" alt=""><figcaption></figcaption></figure>
 
 * Tiến hành **reload**
 
-<figure><img src="../../../../.gitbook/assets/image (7) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (386).png" alt=""><figcaption></figcaption></figure>
 
 * Đã hoàn thành **General Setup**
 
-<figure><img src="../../../../.gitbook/assets/image (8) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (387).png" alt=""><figcaption></figcaption></figure>
 
 **Bước 5:** Cấu hình **Interface LAN**
 
 * Vào phần **Interfaces** -> **Assignments** để gắn thêm **Interface LAN**
 
-<figure><img src="../../../../.gitbook/assets/image (12) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (391).png" alt=""><figcaption></figcaption></figure>
 
 * Nhấn vào **Add**
 
-<figure><img src="../../../../.gitbook/assets/image (13) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (392).png" alt=""><figcaption></figcaption></figure>
 
 * Sau đó nhấn vào **Save**
 
-<figure><img src="../../../../.gitbook/assets/image (14) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (393).png" alt=""><figcaption></figcaption></figure>
 
 * Vào phần **Interfaces** -> **Assignments** để tiến hành **enable LAN Interface**
 
-<figure><img src="../../../../.gitbook/assets/image (15) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (394).png" alt=""><figcaption></figcaption></figure>
 
 * Bạn thực hiện cấu hình như bên dưới
 
-<figure><img src="../../../../.gitbook/assets/image (16) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (395).png" alt=""><figcaption></figcaption></figure>
 
 * Cấu hình **IP** cho **LAN**
 
-<figure><img src="../../../../.gitbook/assets/image (6) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (375).png" alt=""><figcaption></figcaption></figure>
 
 * Sau đó tiến hành **Add a new gateway:** tiến hành nhập **Gateway cho LAN Interface**
 
-<figure><img src="../../../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (376).png" alt=""><figcaption></figcaption></figure>
 
 * Để lấy thông tin IP này, bạn vào mục **Network Interface** của server Pfsense để xem thông tin:
 
-<figure><img src="../../../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (377).png" alt=""><figcaption></figcaption></figure>
 
 * Tiến hành **Save** lại
 
-<figure><img src="../../../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (378).png" alt=""><figcaption></figcaption></figure>
 
 **Bước 6**: Xem lại thông tin cấu hình
 
-<figure><img src="../../../../.gitbook/assets/image (20) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (399).png" alt=""><figcaption></figcaption></figure>
 
 **Bước 7**: Mở rule đi ra **Internet** cho **interface LAN**
 
-<figure><img src="../../../../.gitbook/assets/image (21) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (400).png" alt=""><figcaption></figcaption></figure>
 
 * Tại source bạn chọn dải **IP** được phép đi ra **Internet**
 
-<figure><img src="../../../../.gitbook/assets/image (22) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (401).png" alt=""><figcaption></figcaption></figure>
 
 **Bước 8:** Cấu hình **NAT** để các **vServer** có thể đi ra được **Internet**
 
 * Vào mục **Firewall** -> **NAT**
 
-<figure><img src="../../../../.gitbook/assets/image (23) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (402).png" alt=""><figcaption></figcaption></figure>
 
 * Chọn mode **NAT** sau đó tiến hành cấu hình **NAT**
 
-<figure><img src="../../../../.gitbook/assets/image (24) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (403).png" alt=""><figcaption></figcaption></figure>
 
 * Nhấn vào **Add** để thêm **rule**
 
-<figure><img src="../../../../.gitbook/assets/image (25) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (404).png" alt=""><figcaption></figcaption></figure>
 
 * Chọn **source**, **destination NAT**
 
-<figure><img src="../../../../.gitbook/assets/image (26).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (405).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
-## Khởi tạo Route Table <a href="#khoitaomotpublicclustervoiprivatenodegroup-khoitaoroutetable" id="khoitaomotpublicclustervoiprivatenodegroup-khoitaoroutetable"></a>
+## 4. Khởi tạo Route Table <a href="#khoitaomotpublicclustervoiprivatenodegroup-khoitaoroutetable" id="khoitaomotpublicclustervoiprivatenodegroup-khoitaoroutetable"></a>
 
 Sau khi Pfsense được khởi tạo và cấu hình thành công, bạn cần tạo một Route table để kết nối tới các mạng khác nhau. Cụ thể thực hiện theo các bước sau để tạo Route table:
 
@@ -187,14 +184,14 @@ Ví dụ:
 
 ***
 
-## **Kiểm tra kết nối**
+## **5. Kiểm tra kết nối**
 
 Tiến hành ping google.com hoặc 8.8.8.8 để kiểm tra
 
 * Trước khi **Enable NAT** server không ra được internet
 
-<figure><img src="../../../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (407).png" alt=""><figcaption></figcaption></figure>
 
 * Sau khi **cấu hình NAT** tiến hành ping 8.8.8.8 để kiểm tra
 
-<figure><img src="../../../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (408).png" alt=""><figcaption></figcaption></figure>

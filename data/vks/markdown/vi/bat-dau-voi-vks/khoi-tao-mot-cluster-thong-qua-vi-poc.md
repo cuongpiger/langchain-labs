@@ -1,5 +1,7 @@
 # Khởi tạo một Cluster thông qua ví POC
 
+## 1. Giới thiệu
+
 Tài nguyên POC sinh ra nhằm mục đích hỗ trợ người dùng có thể trải nghiệm dịch vụ tại VNG Cloud một cách tốt nhất.
 
 Điều kiện sử dụng tài nguyên POC:
@@ -11,19 +13,17 @@ Tài nguyên POC sinh ra nhằm mục đích hỗ trợ người dùng có thể
 
 ***
 
-### Điều kiện cần <a href="#khoitaomotpublicclustervoipublicnodegroup-dieukiencan" id="khoitaomotpublicclustervoipublicnodegroup-dieukiencan"></a>
+## 2. Điều kiện cần <a href="#khoitaomotpublicclustervoipublicnodegroup-dieukiencan" id="khoitaomotpublicclustervoipublicnodegroup-dieukiencan"></a>
 
 Để có thể khởi tạo một **Cluster** và **Deploy** một **Workload**, bạn cần:
 
-* Có ít nhất 1 **VPC** và 1 **Subnet** đang ở trạng thái **ACTIVE**. Nếu bạn chưa có VPC, Subnet nào, vui lòng khởi tạo VPC, Subnet theo hướng dẫn tại [đây.](../../vserver/compute-hcm03-1a/network/virtual-private-cloud-vpc/)&#x20;
-* Có ít nhất 1 **SSH** key đang ở trạng thái **ACTIVE**. Nếu bạn chưa có SSH key nào, vui lòng khởi tạo SSH key theo hướng dẫn tại [đây.](../../vserver/compute-hcm03-1a/security/ssh-key-bo-khoa.md)
+* Có ít nhất 1 **VPC** và 1 **Subnet** đang ở trạng thái **ACTIVE**. Nếu bạn chưa có VPC, Subnet nào, vui lòng khởi tạo VPC, Subnet theo hướng dẫn tại [đây.](broken-reference)&#x20;
+* Có ít nhất 1 **SSH** key đang ở trạng thái **ACTIVE**. Nếu bạn chưa có SSH key nào, vui lòng khởi tạo SSH key theo hướng dẫn tại [đây.](broken-reference)
 * Đã cài đặt và cấu hình **kubectl** trên thiết bị của bạn. vui lòng tham khảo tại [đây](https://kubernetes.io/vi/docs/tasks/tools/install-kubectl/) nếu bạn chưa rõ cách cài đặt và sử dụng kuberctl. Ngoài ra, bạn không nên sử dụng phiên bản kubectl quá cũ, chúng tôi khuyến cáo bạn nên sử dụng phiên bản kubectl sai lệch không quá một phiên bản với version của cluster.
 
 ***
 
-### Khởi tạo Cluster <a href="#khoitaomotpublicclustervoipublicnodegroup-khoitaocluster" id="khoitaomotpublicclustervoipublicnodegroup-khoitaocluster"></a>
-
-**Cluster trong Kubernetes** là một tập hợp gồm một hoặc nhiều máy ảo (VM) được kết nối lại với nhau để chạy các ứng dụng được đóng gói dạng container. Cluster cung cấp một môi trường thống nhất để triển khai, quản lý và vận hành các container trên quy mô lớn.
+## 3. Khởi tạo Cluster <a href="#khoitaomotpublicclustervoipublicnodegroup-khoitaocluster" id="khoitaomotpublicclustervoipublicnodegroup-khoitaocluster"></a>
 
 Để khởi tạo một Cluster, hãy làm theo các bước bên dưới:
 
@@ -37,22 +37,18 @@ Tài nguyên POC sinh ra nhằm mục đích hỗ trợ người dùng có thể
 
 **Bước 5:** Chọn **POC** và chọn tiếp **Create Kubernetes cluster.** Hãy chờ vài phút để chúng tôi khởi tạo Cluster của bạn, trạng thái của Cluster lúc này là **Creating**.
 
-<figure><img src="../../.gitbook/assets/image (819).png" alt=""><figcaption></figcaption></figure>
-
 **Bước 6:** Khi trạng thái **Cluster** là **Active**, bạn có thể xem thông tin Cluster, thông tin Node Group bằng cách chọn vào Cluster Name tại cột **Name**.
 
-{% hint style="info" %}
 **Chú ý:**
 
 * Khi bạn khởi tạo Cluster và chọn sử dụng ví POC, chúng tôi đã tự động tạo Control Plane, Node, Volume và Private Service Endpoint (nếu bạn chọn sử dụng) thông qua ví POC. Đối với các tài nguyên khác như
   * **PVC:** khi thực hiện khởi tạo qua yaml, bạn vui lòng thêm tham số `isPOC: "true"` vào file yaml này. Tham khảo ví dụ bên dưới.
   * **LoadBalancer:** khi thực hiện khởi tạo qua yaml, bạn vui lòng thêm `annotation vks.vngcloud.vn/is-poc: "true"` vào file yaml này. Tham khảo ví dụ bên dưới.
 * Do các resource **Load Balancer** và **PVC** được quản lý thông qua YAML, sau khi Stop POC, nếu trong file YAML của bạn vẫn có tham số `isPOC : true hoặc is-poc : true`, trong trường hợp bạn xóa Load Balancer từ Portal vLB và xóa tham số`load-balancer-id` trong yaml, lúc này hệ thống sẽ tự động tạo lại các resource này thông qua ví POC. Để tạo Load Balancer và PVC khác bằng tiền thật, vui lòng thay đổi tham số isPOC thành false. (`isPOC : false hoặc is-poc : false`). Chúng tôi khuyến cáo bạn nên thực hiện điều chỉnh tham số này trước khi thực hiện Stop POC cho Cluster của bạn.
-{% endhint %}
 
 ***
 
-### Kết nối và kiểm tra thông tin Cluster vừa tạo <a href="#khoitaomotpublicclustervoipublicnodegroup-ketnoivakiemtrathongtinclustervuatao" id="khoitaomotpublicclustervoipublicnodegroup-ketnoivakiemtrathongtinclustervuatao"></a>
+## 4. Kết nối và kiểm tra Cluster <a href="#khoitaomotpublicclustervoipublicnodegroup-ketnoivakiemtrathongtinclustervuatao" id="khoitaomotpublicclustervoipublicnodegroup-ketnoivakiemtrathongtinclustervuatao"></a>
 
 Sau khi Cluster được khởi tạo thành công, bạn có thể thực hiện kết nối và kiểm tra thông tin Cluster vừa tạo theo các bước:&#x20;
 
@@ -81,7 +77,7 @@ ng-0f4ed631-1252-49f7-8dfc-386fa0b2d29b-a8ef0   Ready      <none>   28m   v1.28.
 
 ***
 
-### Deploy Workload và expose service thông qua vLB Layer 4 hoặc vLB Layer 7 <a href="#exposemotservicethongquavlblayer4-deploymotworkload" id="exposemotservicethongquavlblayer4-deploymotworkload"></a>
+## 5. Deploy Workload  <a href="#exposemotservicethongquavlblayer4-deploymotworkload" id="exposemotservicethongquavlblayer4-deploymotworkload"></a>
 
 Sau đây là hướng dẫn để bạn deploy 2 workload và expose chúng qua Load Balancer Layer 4 và Load Balancer Layer 7 trên Kubernetes.
 
@@ -183,7 +179,7 @@ kubectl get svc,deploy,pod -owide
 
 ***
 
-### **Tạo Persistent Volume**
+## **6. Tạo Persistent Volume**
 
 * Tạo file **persistent-volume.yaml** với nội dung sau:
 
@@ -242,15 +238,11 @@ kubectl apply -f persistent-volume.yaml
 
 ***
 
-### **Tạo Snapshot**
+## **7. Tạo Snapshot**
 
 Đối với loại resource **Snapshot**, bạn không thể chỉ định snapshot sử dụng ví POC từ VKS. Để thực hiện tạo Snapshot qua ví POC, tại **vServer Portal**, vui lòng chọn **Activate Snapshot**, sau đó tại màn hình **Checkout**, vui lòng chọn sử dụng ví **POC**. Lúc này **tất cả các resource snapshot của bạn sẽ được tạo qua ví POC**. Do đó, việc stop POC cần được bạn thực hiện thông qua **vConsole** hoặc **vServer Portal**. Tham khảo thêm hình bên dưới.
 
-<figure><img src="../../.gitbook/assets/image (820).png" alt=""><figcaption></figcaption></figure>
-
-<figure><img src="../../.gitbook/assets/image (821).png" alt=""><figcaption></figcaption></figure>
-
-**Cài đặt VNGCloud Snapshot Controller**
+### **7.1 Cài đặt VNGCloud Snapshot Controller**
 
 * Cài đặt Helm phiên bản từ 3.0 trở lên. Tham khảo tại [https://helm.sh/docs/intro/install/](https://helm.sh/docs/intro/install/) để biết cách cài đặt.
 * Thêm repo này vào cluster của bạn qua lệnh:
@@ -282,7 +274,7 @@ snapshot-controller-7fdd984f89-745tg           0/1     ContainerCreating   0    
 snapshot-controller-7fdd984f89-k94wq           0/1     ContainerCreating   0              3s
 ```
 
-**Tạo file snapshot.yaml với nội dung sau:**
+### **7.2 Tạo file snapshot.yaml với nội dung sau:**
 
 ```bash
 apiVersion: snapshot.storage.k8s.io/v1

@@ -2,19 +2,24 @@
 
 Sử dụng hướng dẫn bên dưới dể làm việc với Private Node group thông qua Palo Alto.
 
-## Điều kiện cần
+## 1. Điều kiện cần
 
 Để có thể sử dụng Palo Alto làm NAT Gateway cho Cluster trên hệ thống VKS, bạn cần có:
 
 * Một **server (VM) Windows** đã được khởi tạo trên hệ thống **vServer** với cấu hình như sau:
-
-<table><thead><tr><th width="240">Item</th><th>Cấu hình</th></tr></thead><tbody><tr><td>Flavor</td><td>2x4</td></tr><tr><td>Volume</td><td>20 GB</td></tr><tr><td>VPC</td><td>10.76.0.0/16</td></tr><tr><td>Subnet</td><td>10.76.0.4/24</td></tr><tr><td>Network Interface 1</td><td>10.76.0.3</td></tr></tbody></table>
-
+  * Flavor: 2x4
+  * Volume: 20 GB
+  * VPC: 10.76.0.0/16
+  * Subnet: 10.76.0.4/24
+  * Network Interface 1: 10.76.0.3
 * Một **server (VM) Palo Alto** được khởi tạo trên hệ thống **vMarketPlace** theo hướng dẫn bên dưới với cấu hình như sau:
+  * Flavor: 2x8
+  * Volume: 60 GB
+  * VPC: 10.76.0.0/16
+  * Network Interface 1: 10.76.255.4
+  * Network Interface 2: 10.76.0.4
 
-<table><thead><tr><th width="244">Item</th><th>Cấu hình</th></tr></thead><tbody><tr><td>Flavor</td><td>2x8</td></tr><tr><td>Volume</td><td>60 GB</td></tr><tr><td>VPC</td><td>10.76.0.0/16</td></tr><tr><td>Network Interface 1</td><td>10.76.255.4</td></tr><tr><td>Network Interface 2</td><td>10.76.0.4</td></tr></tbody></table>
-
-## Khởi tạo Palo Alto <a href="#toc165621057" id="toc165621057"></a>
+## 2. Khởi tạo Palo Alto <a href="#toc165621057" id="toc165621057"></a>
 
 **Bước 1:** Truy cập vào [https://marketplace.console.vngcloud.vn/](https://marketplace.console.vngcloud.vn/)
 
@@ -26,17 +31,17 @@ Sử dụng hướng dẫn bên dưới dể làm việc với Private Node grou
 
 ***
 
-## Cấu hình thông số cho Palo Alto <a href="#toc165621058" id="toc165621058"></a>
+## 3. Cấu hình thông số cho Palo Alto <a href="#toc165621058" id="toc165621058"></a>
 
 **Bước 1:** Sau khi khởi tạo Palo Alto từ vMarketPlace theo hướng dẫn bên trên, bạn có thể truy cập vào giao diện vServer tại [đây](https://hcm-3.console.vngcloud.vn/vserver/v-server/cloud-server) để kiểm tra server chạy Palo Alto đã được khởi tạo xong chưa. <mark style="color:red;">**Tiếp theo, bạn mở rule Any trên Security Group cho server Palo Alto vừa tạo. Việc mở rule Any trên Security Group sẽ cho phép tất cả lưu lượng truy cập đến server Palo Alto.**</mark>
 
-<figure><img src="../../../../.gitbook/assets/image (502).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (922).png" alt=""><figcaption></figcaption></figure>
 
 **Bước 2: Sau khi server chạy Palo Alto được khởi tạo thành công**. Để vào GUI của Palo Alto bạn cần có 1 vServer chạy Windows. Sau đó bạn truy cập vào bằng IP Internal Interface với tên đăng nhập và mật khẩu mặc định là: **admin/admin**
 
 Lưu ý: Về phần Network của vServer Windows để truy cập vào GUI của Palo Alto. Bạn cần tạo cùng VPC và sử dụng subnet khác với subnet có priority là 1 khi khởi tạo Palo Alto
 
-![](<../../../../.gitbook/assets/3 (1) (1).png>)
+![](<../../../../.gitbook/assets/3 (2).png>)
 
 **Bước 3**: Sau khi đăng nhập xong, bạn cần thực hiện thay đổi mật khẩu lần đầu. Hãy nhập mật khẩu mới theo mong muốn của bạn.
 
@@ -147,7 +152,7 @@ Lưu ý: Cần thay đổi **IP Address** thành địa chỉ **Static IP** mà 
 
 ***
 
-## Khởi tạo Route Table <a href="#khoitaomotpublicclustervoiprivatenodegroup-khoitaoroutetable" id="khoitaomotpublicclustervoiprivatenodegroup-khoitaoroutetable"></a>
+## 4. Khởi tạo Route Table <a href="#khoitaomotpublicclustervoiprivatenodegroup-khoitaoroutetable" id="khoitaomotpublicclustervoiprivatenodegroup-khoitaoroutetable"></a>
 
 Sau khi Palo Alto được khởi tạo và cấu hình thành công, bạn cần tạo một Route table để kết nối tới các mạng khác nhau. Cụ thể thực hiện theo các bước sau để tạo Route table:
 
@@ -172,11 +177,11 @@ Sau khi Palo Alto được khởi tạo và cấu hình thành công, bạn cầ
 
 Ví dụ:
 
-<figure><img src="../../../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/image (410).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
-## **Kiểm tra kết nối**
+## **5. Kiểm tra kết nối**
 
 * Tiến hành ping 8.8.8.8 hoặc google.com
 

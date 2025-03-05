@@ -10,7 +10,7 @@ Hiện tại, hệ thống VKS của chúng tôi đã hỗ trợ bạn nâng c�
 
 **Bước 2:** Tại màn hình **Overview**, chọn menu **Kubernetes Cluster.** Chọn vào một **Cluster** mà bạn muốn nâng cấp **Node Group Version**.
 
-**Bước 3:** Chọn biểu tượng ![](https://docs-admin.vngcloud.vn/download/thumbnails/73762021/image2024-4-16\_15-51-55.png?version=1\&modificationDate=1713262603000\&api=v2)và chọn **Upgrade Node Group version** để thực hiện nâng cấp version node group.
+**Bước 3:** Chọn biểu tượng ![](https://docs-admin.vngcloud.vn/download/thumbnails/73762021/image2024-4-16_15-51-55.png?version=1\&modificationDate=1713262603000\&api=v2)và chọn **Upgrade Node Group version** để thực hiện nâng cấp version node group.
 
 **Bước 4:** Bạn có thể lựa chọn phiên bản mới cho tất cả các Node Group. Phiên bản mới cần hợp lệ và tương thích với phiên bản hiện tại của cluster. Cụ thể: bạn có thể chọn:
 
