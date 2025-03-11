@@ -1,6 +1,6 @@
 # Tự động quản lý Certificate trong VKS với Nginx Ingress Controller, Cert-Manager, và Let's Encrypt
 
-1\. Điều kiện cần
+## Điều kiện cần 
 
 * Bạn đã thực hiện khởi tạo Cluster trên hệ thống VKS theo các hướng dẫn tại [đây ](https://docs.vngcloud.vn/vng-cloud-document/vn/vks/bat-dau-voi-vks/expose-mot-service-thong-qua-vlb-layer4)và trên cụm của bạn đã được cài đặt **VNGCloud LoadBalancer Controller.**
 * Tiếp theo, hãy đảm bảo bận có một **domain** đã được đăng ký và sử dụng.
@@ -13,7 +13,7 @@ helm install nginx-ingress-controller oci://ghcr.io/nginxinc/charts/nginx-ingres
 
 ***
 
-## **2. Cài đặt Cert-Manager**
+## **Cài đặt Cert-Manager**
 
 **Cert-Manager** chịu trách nhiệm tự động cấp phát và gia hạn chứng chỉ từ **Let's Encrypt.**
 
@@ -31,9 +31,9 @@ helm install \
 
 ***
 
-## **3. Các bước thực hiện**
+## **Các bước thực hiện**
 
-### **3.1 Deploy sample app**
+### **Deploy sample app**
 
 Bạn hãy thực hiện deploy một sample app, ví dụ:
 
@@ -42,11 +42,13 @@ kubectl create deployment echo-server --image=mccutchen/go-httpbin
 kubectl expose deployment echo-server --name=clusterip --port=80 --target-port=8080 --type=ClusterIP
 ```
 
-### **3.2 Cấu hình Issuer**
+### **Cấu hình Issuer**
 
 Issuer là thành phần giúp Cert-Manager giao tiếp với Let's Encrypt để cấp phát chứng chỉ.
 
-* Hướng dẫn thử nghiệm trên môi trường STAGING
+<details>
+
+<summary>Thử nghiệm trên môi trường STAGING</summary>
 
 1.  Tạo file `letsencrypt-issuer.yaml`:
 
@@ -76,7 +78,8 @@ Issuer là thành phần giúp Cert-Manager giao tiếp với Let's Encrypt đ�
     ```bash
     kubectl describe issuer letsencrypt-staging
     ```
-4.  Kết quả trả về như sau:
+
+4)  Kết quả trả về như sau:
 
     ```bash
     Status:
@@ -89,7 +92,7 @@ Issuer là thành phần giúp Cert-Manager giao tiếp với Let's Encrypt đ�
         Status:                True
         Type:                  Ready
     ```
-5.  Tiếp tục thực hiện deploy ingress, thay đổi domain của bạn trong file yaml bên dưới:
+5)  Tiếp tục thực hiện deploy ingress, thay đổi domain của bạn trong file yaml bên dưới: 
 
     ```bash
     apiVersion: networking.k8s.io/v1
@@ -117,7 +120,7 @@ Issuer là thành phần giúp Cert-Manager giao tiếp với Let's Encrypt đ�
                 port:
                   number: 80
     ```
-6.  Kiểm tra certificate qua lệnh:
+6)  Kiểm tra certificate qua lệnh:
 
     ```bash
     kubectl get certificate
@@ -125,7 +128,7 @@ Issuer là thành phần giúp Cert-Manager giao tiếp với Let's Encrypt đ�
     NAME                     READY   SECRET                   AGE
     quickstart-example-tls   True    quickstart-example-tls   16m     # Ready should be True
     ```
-7.  Kiểm tra thông tin chi tiết certificate:
+7)  Kiểm tra thông tin chi tiết certificate:
 
     ```bash
     kubectl describe certificate quickstart-example-tls
@@ -177,12 +180,14 @@ Issuer là thành phần giúp Cert-Manager giao tiếp với Let's Encrypt đ�
       Normal   CertIssued      7m                 cert-manager  Certificate issued Successfully
 
     ```
-8.  Kiểm tra kết nối đến domain qua lệnh:
+8)  Kiểm tra kết nối đến domain qua lệnh:
 
     ```bash
     curl -kivL -H 'Host: ______DOMAIN______' 'http://_____IP_____'
     ```
-9.  Bạn cũng có thể thực hiện xóa các resource thử nghiệm qua lệnh:
+
+     
+9)  Bạn cũng có thể thực hiện xóa các resource thử nghiệm qua lệnh:
 
     ```bash
     kubectl delete ingress go-httpbin
@@ -191,7 +196,11 @@ Issuer là thành phần giúp Cert-Manager giao tiếp với Let's Encrypt đ�
     kubectl delete secret letsencrypt-staging
     ```
 
-* Hướng dẫn thực hiện trên môi trường PRODUCTION
+</details>
+
+<details>
+
+<summary>Thực hiện trên môi trường PRODUCTION</summary>
 
 1.  Tạo file `letsencrypt-issuer.yaml`:
 
@@ -221,7 +230,8 @@ Issuer là thành phần giúp Cert-Manager giao tiếp với Let's Encrypt đ�
     ```bash
     kubectl describe issuer letsencrypt-prod
     ```
-4.  Tiếp tục thực hiện deploy ingress, thay đổi domain của bạn trong file yaml bên dưới:
+
+4)  Tiếp tục thực hiện deploy ingress, thay đổi domain của bạn trong file yaml bên dưới: 
 
     ```bash
     apiVersion: networking.k8s.io/v1
@@ -249,3 +259,5 @@ Issuer là thành phần giúp Cert-Manager giao tiếp với Let's Encrypt đ�
                 port:
                   number: 80
     ```
+
+</details>

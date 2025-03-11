@@ -1,6 +1,6 @@
 # Giới hạn và hạn chế ALB
 
-## Giới hạn <a href="#restrictionsandlimitationsalb-gioihan" id="restrictionsandlimitationsalb-gioihan"></a>
+## Giới hạn 
 
 Một vài lưu ý về giới hạn của việc ingress an ALB vào một cluster:
 
@@ -10,7 +10,7 @@ Một vài lưu ý về giới hạn của việc ingress an ALB vào một clus
 
 ***
 
-## Hạn chế <a href="#restrictionsandlimitationsalb-hanche" id="restrictionsandlimitationsalb-hanche"></a>
+## Hạn chế 
 
 * Ingress controller manager cần phải cấu hình các annotation để chỉ định các thuộc tính của ALB, như protocol, port,... Các annotation này có thể khác nhau tùy theo nhà cung cấp dịch vụ đám mây, hiện tại với **VNGCloud LoadBalancer Controller** đang cung cấp danh sách annotation tham khảo tại [cau-hinh-cho-mot-application-load-balancer.md](cau-hinh-cho-mot-application-load-balancer.md "mention"). Chúng tôi sẽ nâng cấp thêm phần này trong các phiên bản release kế tiếp.
 * Hiện tại, vLB chưa hỗ trợ tính năng strip path ở Load Balancer Layer 7, chúng tôi sẽ sớm tích hợp tính năng này trong tương lai.

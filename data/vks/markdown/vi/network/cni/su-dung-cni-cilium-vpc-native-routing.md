@@ -2,7 +2,7 @@
 
 ## Tổng quan
 
-**CNI (Container Network Interface) Cilium VPC Native Routing** là một cơ chế giúp Kubernetes quản lý mạng mà không cần sử dụng overlay networks. Thay vì dùng các lớp mạng ảo, **CNI Cilium VPC Native Routing** tận dụng khả năng routing trực tiếp từ VPC (Virtual Private Cloud) của các nhà cung cấp dịch vụ đám mây để tối ưu hóa việc truyền dữ liệu giữa các node và pod trong cụm Kubernetes.
+**CNI (Container Network Interface) Cilium VPC Native Routing** là một cơ chế giúp Kubernetes quản lý mạng mà không cần sử dụng overlay networks. Thay vì dùng các lớp mạng ảo, **CNI Cilium VPC Native Routing** tận dụng khả năng routing trực tiếp từ VPC (Virtual Private Cloud) của các nhà cung cấp dịch vụ đám mây để tối ưu hóa việc truyền dữ liệu giữa các node và pod trong cụm Kubernetes. 
 
 ***
 
@@ -10,7 +10,7 @@
 
 Trên VKS, **CNI (Container Network Interface) Cilium VPC Native Routing** hoạt động theo mô hình sau:
 
-<figure><img src="../../../.gitbook/assets/image_2024-10-01_10-09-47.png" alt=""><figcaption></figcaption></figure>
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image_2024-10-01_10-09-47.png?raw=true)
 
 **Trong đó:**
 
@@ -24,7 +24,7 @@ Trên VKS, **CNI (Container Network Interface) Cilium VPC Native Routing** hoạ
 
 Để có thể khởi tạo một **Cluster** và **Deploy** một **Workload**, bạn cần:
 
-* Có ít nhất 1 **VPC** và 1 **Subnet** đang ở trạng thái **ACTIVE**. Nếu bạn chưa có VPC, Subnet nào, vui lòng khởi tạo VPC, Subnet theo hướng dẫn bên dưới:
+* Có ít nhất 1 **VPC** và 1 **Subnet** đang ở trạng thái **ACTIVE**. Nếu bạn chưa có VPC, Subnet nào, vui lòng khởi tạo VPC, Subnet theo hướng dẫn bên dưới: 
   * **Bước 1:** Truy cập vào trang chủ vServer tại link [https://hcm-3.console.vngcloud.vn/vserver](https://hcm-3.console.vngcloud.vn/vserver)
   * **Bước 2**: Chọn menu **VPCs** ở menu bên trái màn hình.
   * **Bước 3:** Tại đây, nếu bạn chưa có VPC nào, vui lòng chọn **Create VPC** bằng cách nhập VPC name và định nghĩa dãy **CIDR/16** mong muốn.
@@ -34,24 +34,20 @@ Trên VKS, **CNI (Container Network Interface) Cilium VPC Native Routing** hoạ
     * **Primary CIDR**: Đây là dải địa chỉ IP chính của subnet. Mọi địa chỉ IP nội bộ của các máy ảo (VM) trong subnet này sẽ được lấy từ dải địa chỉ này. Giả sử, nếu bạn đặt Primary CIDR là 10.1.0.0/24, các địa chỉ IP của các VM sẽ nằm trong khoảng từ 10.1.0.1 đến 10.1.0.254.
     * **Secondary CIDR**: Đây là dải địa chỉ IP phụ, được sử dụng để cung cấp thêm địa chỉ IP hoặc để phân chia các dịch vụ khác nhau trong cùng một subnet. Mỗi Node có một dải địa chỉ IP riêng cho các pod (Pod CIDR). Các pod trong mỗi node sử dụng địa chỉ từ CIDR này và giao tiếp qua mạng ảo.
 
-<figure><img src="../../../.gitbook/assets/image (1239).png" alt=""><figcaption></figcaption></figure>
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(776).png?raw=true)
 
-<figure><img src="../../../.gitbook/assets/image (1240).png" alt=""><figcaption></figcaption></figure>
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(777).png?raw=true)
 
-{% hint style="info" %}
-**Chú ý:**
-
-* Các dải địa chỉ IP của **Primary CIDR** và **Secondary CIDR** không được trùng lặp. Điều này có nghĩa là dải địa chỉ của **Secondary CIDR** phải nằm ngoài phạm vi của **Primary CIDR** và ngược lại. Giả sử, nếu Primary CIDR là 10.1.0.0/24, thì Secondary CIDR không thể là 10.1.0.0/20 vì nó nằm trong phạm vi của Primary CIDR. Thay vào đó, bạn có thể sử dụng một dải địa chỉ khác như 10.1.16.0/20.
-{% endhint %}
+> **Chú ý:**
+>
+> * Các dải địa chỉ IP của **Primary CIDR** và **Secondary CIDR** không được trùng lặp. Điều này có nghĩa là dải địa chỉ của **Secondary CIDR** phải nằm ngoài phạm vi của **Primary CIDR** và ngược lại. Giả sử, nếu Primary CIDR là 10.1.0.0/24, thì Secondary CIDR không thể là 10.1.0.0/20 vì nó nằm trong phạm vi của Primary CIDR. Thay vào đó, bạn có thể sử dụng một dải địa chỉ khác như 10.1.16.0/20.
 
 * Có ít nhất 1 **SSH** key đang ở trạng thái **ACTIVE**. Nếu bạn chưa có SSH key nào, vui lòng khởi tạo SSH key theo hướng dẫn tại [đây.](https://docs.vngcloud.vn/vng-cloud-document/v/vn/vserver/compute-hcm03-1a/security/ssh-key-bo-khoa)
 * Đã cài đặt và cấu hình **kubectl** trên thiết bị của bạn. vui lòng tham khảo tại [đây](https://kubernetes.io/vi/docs/tasks/tools/install-kubectl/) nếu bạn chưa rõ cách cài đặt và sử dụng kuberctl. Ngoài ra, bạn không nên sử dụng phiên bản kubectl quá cũ, chúng tôi khuyến cáo bạn nên sử dụng phiên bản kubectl sai lệch không quá một phiên bản với version của cluster.
 
-{% hint style="info" %}
-**Chú ý:**
-
-* Khi bạn sử dụng loại network Cilium Native Routing cho cluster của bạn, bạn cần thực hiện cấu hình các **Security Groups** cho phép các kết nối cần thiết. Ví dụ, khi bạn chạy một NGINX pod trên một node, bạn phải cho phép traffic trên port 80 để đảm bảo các requests từ các node khác có thể kết nối tới. Việc cấu hình này chỉ bắt buộc nếu bạn sử dụng Cilium Native Routing, đối với Calico Overlay và Cilium Overlay thì việc cấu hình Security Groups này là không cần thiết.
-{% endhint %}
+> **Chú ý:**
+>
+> * Khi bạn sử dụng loại network Cilium Native Routing cho cluster của bạn, bạn cần thực hiện cấu hình các **Security Groups** cho phép các kết nối cần thiết. Ví dụ, khi bạn chạy một NGINX pod trên một node, bạn phải cho phép traffic trên port 80 để đảm bảo các requests từ các node khác có thể kết nối tới. Việc cấu hình này chỉ bắt buộc nếu bạn sử dụng Cilium Native Routing, đối với Calico Overlay và Cilium Overlay thì việc cấu hình Security Groups này là không cần thiết.
 
 ***
 
@@ -65,37 +61,44 @@ Trên VKS, **CNI (Container Network Interface) Cilium VPC Native Routing** hoạ
 
 **Bước 3:** Chờ đợi tới khi chúng tôi khởi tạo thành công tài khoản VKS của bạn. Sau khi Activate thành công, bạn hãy chọn **Create a Cluster.**
 
-**Bước 4:** Tại màn hình khởi tạo Cluster, chúng tôi đã thiết lập thông tin cho Cluster và một **Default Node Group** cho bạn. Để sử dụng **CNI Cilium VPC Native Routing** cho **Cluster** của bạn, vui lòng chọn:
+**Bước 4:** Tại màn hình khởi tạo Cluster, chúng tôi đã thiết lập thông tin cho Cluster và một **Default Node Group** cho bạn. Để sử dụng **CNI Cilium VPC Native Routing** cho **Cluster** của bạn, vui lòng chọn: 
 
 * **Network type**: Cilium VPC Native Routing và các thông số khác như sau:
 
-<table><thead><tr><th width="117">Field</th><th width="404">Ý nghĩa</th><th>Ví dụ minh họa</th></tr></thead><tbody><tr><td><strong>VPC</strong></td><td>Dải địa chỉ IP mà các node của Cluster sẽ sử dụng để giao tiếp.</td><td>Trong hình, chúng tôi lựa chọn VPC có IP range là <strong>10.111.0.0/16</strong>, tương ứng với <strong>65536 IP</strong></td></tr><tr><td><strong>Subnet</strong></td><td>Dải địa chỉ IP nhỏ hơn thuộc VPC. Mỗi node trong Cluster sẽ được gán một IP từ Subnet này. Subnet phải nằm trong dải IP của VPC đã chọn.</td><td>Trong hình, chúng tôi lựa chọn Subnet có <strong>Primary IP range</strong> là <strong>10.111.0.0/24</strong>, tương ứng với <strong>256 IP</strong></td></tr><tr><td><strong>Default Pod IP range</strong></td><td>Đây là dải địa chỉ IP thứ cấp được sử dụng cho các pod. Nó được gọi là <strong>Secondary IP range</strong> vì nó không trùng với dải IP chính của node (Primary IP range). Các pod trong Cluster sẽ được gán IP từ dải này.</td><td>Trong hình, chúng tôi lựa chọn <strong>Secondary IP range</strong> là <strong>10.111.160.0/20</strong> - Tương ứng với <strong>4096 IP</strong> cho các pod</td></tr><tr><td><strong>Node CIDR mask size</strong></td><td>Kích thước của CIDR dành cho các node. Thông số này cho biết mỗi node sẽ được gán bao nhiêu địa chỉ IP từ dải pod IP range. Kích thước này cần được chọn sao cho đảm bảo có đủ địa chỉ IP cho tất cả các pod trên mỗi node. Bạn có thể tham khảo bảng bên dưới để hiểu các tính số lượng IP có thể sử dụng để cấp phát cho node, pod trong cluster của bạn.</td><td>Trong hình, chúng tôi lựa chọn <strong>Node CIDR mask size</strong> là <strong>/25</strong> - Mỗi node sẽ có <strong>128 địa chỉ IP</strong>, phù hợp với số lượng pod bạn mong muốn chạy trên một node.</td></tr></tbody></table>
+| Field | Ý nghĩa | Ví dụ minh họa |
+| --- | --- | --- |
+| **VPC** | Dải địa chỉ IP mà các node của Cluster sẽ sử dụng để giao tiếp. | Trong hình, chúng tôi lựa chọn VPC có IP range là  **10.111.0.0/16** , tương ứng với  **65536 IP** |
+| **Subnet** | Dải địa chỉ IP nhỏ hơn thuộc VPC. Mỗi node trong Cluster sẽ được gán một IP từ Subnet này. Subnet phải nằm trong dải IP của VPC đã chọn. | Trong hình, chúng tôi lựa chọn Subnet có  **Primary IP range**  là  **10.111.0.0/24** , tương ứng với  **256 IP** |
+| **Default Pod IP range** | Đây là dải địa chỉ IP thứ cấp được sử dụng cho các pod. Nó được gọi là  **Secondary IP range**  vì nó không trùng với dải IP chính của node (Primary IP range). Các pod trong Cluster sẽ được gán IP từ dải này. | Trong hình, chúng tôi lựa chọn  **Secondary IP range**  là  **10.111.160.0/20**  - Tương ứng với  **4096 IP**  cho các pod |
+| **Node CIDR mask size** | Kích thước của CIDR dành cho các node. Thông số này cho biết mỗi node sẽ được gán bao nhiêu địa chỉ IP từ dải pod IP range. Kích thước này cần được chọn sao cho đảm bảo có đủ địa chỉ IP cho tất cả các pod trên mỗi node. Bạn có thể tham khảo bảng bên dưới để hiểu các tính số lượng IP có thể sử dụng để cấp phát cho node, pod trong cluster của bạn. | Trong hình, chúng tôi lựa chọn  **Node CIDR mask size**  là  **/25**  - Mỗi node sẽ có  **128 địa chỉ IP** , phù hợp với số lượng pod bạn mong muốn chạy trên một node. |
 
 ### **Các tính toán số lượng IP cho pod và node:**
 
-<figure><img src="../../../.gitbook/assets/image (1193).png" alt="" width="563"><figcaption></figcaption></figure>
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(758).png?raw=true)
 
-Giả sử, khi khởi tạo cluster, tôi lựa chọn:
+Giả sử, khi khởi tạo cluster, tôi lựa chọn: 
 
 * **VPC**: 10.111.0.0/16
-* **Subnet:**
+* **Subnet:** 
   * **Primary IP Range:** 10.111.0.0/24
   * **Secondary IP Range:** 10.111.160.0/20
 * **Node CIDR mask size:** Các giá trị có thể chọn từ **/24** đến **/26**.
 
-<table data-full-width="true"><thead><tr><th>Node CIDR mask size</th><th>Số lượng IP cho mỗi node</th><th>Số lượng node có thể tạo trong dải /20 (4096 IP)</th><th>Số lượng IP phân bổ cho pod trên mỗi node</th><th>Số lượng pod thực tế có thể tạo</th></tr></thead><tbody><tr><td><strong>/24</strong></td><td>256</td><td>16</td><td>256</td><td>128</td></tr><tr><td><strong>/25</strong></td><td>128</td><td>32</td><td>128</td><td>64</td></tr><tr><td><strong>/26</strong></td><td>64</td><td>64</td><td>64</td><td>32</td></tr></tbody></table>
+| Node CIDR mask size | Số lượng IP cho mỗi node | Số lượng node có thể tạo trong dải /20 (4096 IP) | Số lượng IP phân bổ cho pod trên mỗi node | Số lượng pod thực tế có thể tạo |
+| --- | --- | --- | --- | --- |
+| **/24** | 256 | 16 | 256 | 128 |
+| **/25** | 128 | 32 | 128 | 64 |
+| **/26** | 64 | 64 | 64 | 32 |
 
-<figure><img src="../../../.gitbook/assets/image (1190).png" alt=""><figcaption></figcaption></figure>
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(755).png?raw=true)
 
-{% hint style="info" %}
-**Chú ý:**
-
-* **Chỉ một loại networktype:** Trong một cluster, bạn chỉ có thể sử dụng một trong ba loại networktype: Calico Overlay, Cilium Overlay, hoặc Cilium VPC Native Routing
-* **Multiple subnet cho một cluster:** VKS hỗ trợ việc sử dụng nhiều subnet cho một cluster. Điều này cho phép bạn cấu hình mỗi node group trong cluster nằm ở các subnet khác nhau trong cùng một VPC, giúp tối ưu hóa việc phân bổ tài nguyên và quản lý mạng.
-* **Cilium VPC Native Routing và Secondary IP Range**: Khi sử dụng Cilium VPC Native Routing cho một cluster, bạn có thể sử dụng nhiều Secondary IP Range. Tuy nhiên, mỗi Secondary IP Range chỉ có thể được sử dụng bởi một cluster duy nhất. Điều này giúp tránh xung đột địa chỉ IP và đảm bảo tính nhất quán trong quản lý mạng.
-* Khi không đủ địa chỉ IP trong **Node CIDR range** hoặc **Secondary IP range** để tạo thêm node, cụ thể:
-  * Nếu bạn **không thể sử dụng Node mới do** hết dải địa chỉ IP trong **Secondary IP range**. Lúc này, các node mới vẫn sẽ được tạo và được join vào cụm nhưng bạn không thể sử dụng chúng. Các pod được yêu cầu khởi chạy trên node mới này sẽ bị kẹt trong trạng thái "**ContainerCreating**" do không thể tìm thấy node phù hợp để triển khai. Lúc này, bạn cần tạo node group mới với secondary range IP chưa được sử dụng trên cluster nào.
-{% endhint %}
+> **Chú ý:** 
+>
+> * **Chỉ một loại networktype:** Trong một cluster, bạn chỉ có thể sử dụng một trong ba loại networktype: Calico Overlay, Cilium Overlay, hoặc Cilium VPC Native Routing
+> * **Multiple subnet cho một cluster:** VKS hỗ trợ việc sử dụng nhiều subnet cho một cluster. Điều này cho phép bạn cấu hình mỗi node group trong cluster nằm ở các subnet khác nhau trong cùng một VPC, giúp tối ưu hóa việc phân bổ tài nguyên và quản lý mạng.
+> * **Cilium VPC Native Routing và Secondary IP Range**: Khi sử dụng Cilium VPC Native Routing cho một cluster, bạn có thể sử dụng nhiều Secondary IP Range. Tuy nhiên, mỗi Secondary IP Range chỉ có thể được sử dụng bởi một cluster duy nhất. Điều này giúp tránh xung đột địa chỉ IP và đảm bảo tính nhất quán trong quản lý mạng.
+> * Khi không đủ địa chỉ IP trong **Node CIDR range** hoặc **Secondary IP range** để tạo thêm node, cụ thể:
+>   * Nếu bạn **không thể sử dụng Node mới do** hết dải địa chỉ IP trong **Secondary IP range**. Lúc này, các node mới vẫn sẽ được tạo và được join vào cụm nhưng bạn không thể sử dụng chúng. Các pod được yêu cầu khởi chạy trên node mới này sẽ bị kẹt trong trạng thái "**ContainerCreating**" do không thể tìm thấy node phù hợp để triển khai. Lúc này, bạn cần tạo node group mới với secondary range IP chưa được sử dụng trên cluster nào. 
 
 **Bước 5:** Chọn **Create Kubernetes cluster.** Hãy chờ vài phút để chúng tôi khởi tạo Cluster của bạn, trạng thái của Cluster lúc này là **Creating**.
 
@@ -130,7 +133,7 @@ vks-cluster-democilium-nodegroup-558f4-63344   Ready    <none>   5m45s   v1.28.8
 vks-cluster-democilium-nodegroup-558f4-e6e4d   Ready    <none>   6m24s   v1.28.8
 ```
 
-* Tiếp tục thực hiện chạy lệnh sau đây để kiểm tra các **pod** đã được triển khai trên namespace kube-system của bạn:
+* Tiếp tục thực hiện chạy lệnh sau đây để kiểm tra các **pod** đã được triển khai trên namespace kube-system của bạn: 
 
 ```bash
 kubectl get pods -A
@@ -164,9 +167,9 @@ kube-system   vngcloud-csi-node-gx7zd                       3/3     Running   2 
 kube-system   vngcloud-ingress-controller-0                 1/1     Running   1 (5m55s ago)   11m
 ```
 
-**Bước 2: Triển khai nginx trên cluster vừa khởi tạo:**
+**Bước 2: Triển khai nginx trên cluster vừa khởi tạo:** 
 
-* Thực hiện khởi tạo tệp tin **nginx-deployment.yaml** với nội dung tương tự bên dưới:
+* Thực hiện khởi tạo tệp tin **nginx-deployment.yaml** với nội dung tương tự bên dưới: 
 
 ```bash
 apiVersion: apps/v1
@@ -190,7 +193,7 @@ spec:
         - containerPort: 80
 ```
 
-* Thực hiện triển khai deployment này qua lệnh:
+* Thực hiện triển khai deployment này qua lệnh: 
 
 ```bash
 kubectl apply -f nginx-deployment.yaml
@@ -198,7 +201,7 @@ kubectl apply -f nginx-deployment.yaml
 
 **Bước 3: Kiểm tra các pod nginx đã được triển khai và địa chỉ IP được gán cho mỗi pod**
 
-* Thực hiện kiểm tra các pod qua lệnh:
+* Thực hiện kiểm tra các pod qua lệnh: 
 
 ```bash
 kubectl get pods -o wide
@@ -230,7 +233,7 @@ nginx-app-7c79c4bf97-x8jxm   1/1     Running   0          31s   10.111.160.135  
 nginx-app-7c79c4bf97-zlstg   1/1     Running   0          31s   10.111.160.121   vks-cluster-democilium-nodegroup-558f4-e6e4d 
 ```
 
-* Bạn cũng có thể thực hiện xem mô tả chi tiết mỗi pod để kiểm tra thông tin pod này qua lệnh:
+* Bạn cũng có thể thực hiện xem mô tả chi tiết mỗi pod để kiểm tra thông tin pod này qua lệnh: 
 
 ```bash
 kubectl describe pod nginx-app-7c79c4bf97-6v88s
@@ -315,13 +318,13 @@ Ngoài ra, bạn cũng có thể thực hiện thêm các bài kiểm tra kết 
 
 **Bước 6: Kiểm tra kết nối giữa các Pod**
 
-* Thực hiện kiểm tra kết nối giữa các pod, đảm bảo rằng các **pod có thể giao tiếp qua địa chỉ IP của VPC mà không cần qua overlay networks**. Ví dụ bên dưới tôi thực hiện ping từ pod nginx-app-7c79c4bf97-6v88s có địa chỉ IP: 10.111.161.53 tới một server trong cùng VPC có địa chỉ IP: 10.111.0.10:
+* Thực hiện kiểm tra kết nối giữa các pod, đảm bảo rằng các **pod có thể giao tiếp qua địa chỉ IP của VPC mà không cần qua overlay networks**. Ví dụ bên dưới tôi thực hiện ping từ pod nginx-app-7c79c4bf97-6v88s có địa chỉ IP: 10.111.161.53 tới một server trong cùng VPC có địa chỉ IP: 10.111.0.10: 
 
 ```bash
 kubectl exec -it nginx-app-7c79c4bf97-6v88s -- ping 10.111.0.10
 ```
 
-* Nếu kết quả như sau tức là kết nối đã thông:
+* Nếu kết quả như sau tức là kết nối đã thông: 
 
 ```bash
 PING 10.111.0.10 (10.111.0.10): 56 data bytes

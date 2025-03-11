@@ -1,14 +1,18 @@
 # Integrate with Container Storage Interface (CSI)
 
-## 1. Điều kiện cần <a href="#exposemotservicethongquavlblayer7-dieukiencan" id="exposemotservicethongquavlblayer7-dieukiencan"></a>
+### Điều kiện cần 
 
 Để có thể khởi tạo một **Cluster** và **Deploy** một **Workload**, bạn cần:
 
-* Có ít nhất 1 **VPC** và 1 **Subnet** đang ở trạng thái **ACTIVE**. Nếu bạn chưa có VPC, Subnet nào, vui lòng khởi tạo VPC, Subnet theo hướng dẫn tại [đây.](broken-reference)
-* Có ít nhất 1 **SSH** key đang ở trạng thái **ACTIVE**. Nếu bạn chưa có SSH key nào, vui lòng khởi tạo SSH key theo hướng dẫn tại [đây.](broken-reference)
+* Có ít nhất 1 **VPC** và 1 **Subnet** đang ở trạng thái **ACTIVE**. Nếu bạn chưa có VPC, Subnet nào, vui lòng khởi tạo VPC, Subnet theo hướng dẫn tại [đây.](../../vserver/compute-hcm03-1a/network/virtual-private-cloud-vpc/)
+* Có ít nhất 1 **SSH** key đang ở trạng thái **ACTIVE**. Nếu bạn chưa có SSH key nào, vui lòng khởi tạo SSH key theo hướng dẫn tại [đây.](../../vserver/compute-hcm03-1a/network/virtual-private-cloud-vpc/)
 * Đã cài đặt và cấu hình **kubectl** trên thiết bị của bạn. vui lòng tham khảo tại [đây](https://kubernetes.io/vi/docs/tasks/tools/install-kubectl/) nếu bạn chưa rõ cách cài đặt và sử dụng kuberctl. Ngoài ra, bạn không nên sử dụng phiên bản kubectl quá cũ, chúng tôi khuyến cáo bạn nên sử dụng phiên bản kubectl sai lệch không quá một phiên bản với version của cluster.
 
-## 2. Khởi tạo Cluster
+***
+
+### Khởi tạo Cluster 
+
+**Cluster trong Kubernetes** là một tập hợp gồm một hoặc nhiều máy ảo (VM) được kết nối lại với nhau để chạy các ứng dụng được đóng gói dạng container. Cluster cung cấp một môi trường thống nhất để triển khai, quản lý và vận hành các container trên quy mô lớn.
 
 Để khởi tạo một Cluster, hãy làm theo các bước bên dưới:
 
@@ -26,7 +30,7 @@
 
 ***
 
-## 3. Kết nối và kiểm tra thông tin Cluster vừa tạo <a href="#exposemotservicethongquavlblayer7-ketnoivakiemtrathongtinclustervuatao" id="exposemotservicethongquavlblayer7-ketnoivakiemtrathongtinclustervuatao"></a>
+### Kết nối và kiểm tra thông tin Cluster vừa tạo 
 
 Sau khi Cluster được khởi tạo thành công, bạn có thể thực hiện kết nối và kiểm tra thông tin Cluster vừa tạo theo các bước:
 
@@ -55,46 +59,66 @@ ng-0f4ed631-1252-49f7-8dfc-386fa0b2d29b-a8ef0   Ready      <none>   28m   v1.28.
 
 ***
 
-## 4. Khởi tạo Service Account và cài đặt VNGCloud LoadBalancer Controller <a href="#exposemotservicethongquavlblayer4-khoitaoserviceaccountvacaidatvngcloudcontrollermanager" id="exposemotservicethongquavlblayer4-khoitaoserviceaccountvacaidatvngcloudcontrollermanager"></a>
+### Khởi tạo Service Account và cài đặt VNGCloud BlockStorage CSI Driver 
 
-**Lưu ý:**
+> **Chú ý:**
+>
+> * Khi bạn thực hiện khởi tạo Cluster theo hướng dẫn bên trên, nếu bạn chưa bật option **Enable BlockStore Persistent Disk CSI Driver**, mặc định chúng tôi sẽ không cài sẵn plugin này vào Cluster của bạn. Bạn cần tự thực hiện Khởi tạo Service Account và cài đặt VNGCloud BlockStorage CSI Driver theo hướng dẫn bên dưới. Nếu bạn đã bật option **Enable BlockStore Persistent Disk CSI Driver**, thì chúng tôi đã cài sẵn plugin này vào Cluster của bạn, hãy bỏ qua bước Khởi tạo Service Account, cài đặt VNGCloud BlockStorage CSI Driver và tiếp tục thực hiện theo hướng dẫn kể từ Deploy một Workload.
+> * ****VNGCloud BlockStorage CSI Driver**** **chỉ hỗ trợ attach volume với một node (VM) duy nhất trong suốt vòng đời của volume đó. Nếu bạn có nhu cầu ReadWriteMany, bạn có thể cân nhắc sử dụng NFS CSI Driver, vì nó cho phép nhiều nodes có thể Read và Write trên cùng một volume cùng một lúc. Điều này rất hữu ích cho các ứng dụng cần chia sẻ dữ liệu giữa nhiều pods hoặc services trong Kubernetes.**
 
-* Nếu chưa bật **Enable vLB Native Integration Driver**, bạn cần tự cài đặt **VNGCloud LoadBalancer Controller** theo hướng dẫn bên dưới.
-* Nếu đã bật tùy chọn này, plugin sẽ được cài đặt sẵn, bạn có thể bỏ qua bước này.
+<details>
 
-### 4.1 Khởi tạo Service Account <a href="#exposemotservicethongquavlblayer4-khoitaoserviceaccount" id="exposemotservicethongquavlblayer4-khoitaoserviceaccount"></a>
+<summary>Khởi tạo Service Account và cài đặt VNGCloud BlockStorage CSI Driver</summary>
 
-* Khởi tạo hoặc sử dụng một **service account** đã tạo trên IAM và gắn policy: **vLBFullAccess**, **vServerFullAccess**. Để tạo service account bạn truy cập tại [đây](https://hcm-3.console.vngcloud.vn/iam/service-accounts) và thực hiện theo các bước sau:
+**Khởi tạo Service Account**
+
+* Khởi tạo hoặc sử dụng một **service account** đã tạo trên IAM và gắn policy: **vServerFullAccess**. Để tạo service account bạn truy cập tại [đây](https://hcm-3.console.vngcloud.vn/iam/service-accounts) và thực hiện theo các bước sau:
   * Chọn "**Create a Service Account**", điền tên cho Service Account và nhấn **Next Step** để gắn quyền cho Service Account
-  * Tìm và chọn **Policy:** **vLBFullAccess và Policy:** **vServerFullAccess**, sau đó nhấn "**Create a Service Account**" để tạo Service Account, Policy: vLBFullAccess vàPolicy: vServerFullAccess do VNG Cloud tạo ra, bạn không thể xóa các policy này.
+  * Tìm và chọn **Policy:** **vServerFullAccess**, sau đó nhấn "**Create a Service Account**" để tạo Service Account, Policy: vLBFullAccess vàPolicy: vServerFullAccess do VNG Cloud tạo ra, bạn không thể xóa các policy này.
   * Sau khi tạo thành công bạn cần phải lưu lại **Client\_ID** và **Secret\_Key** của Service Account để thực hiện bước tiếp theo.
 
-### 4.2 Cài đặt VNGCloud LoadBalancer Controller <a href="#exposemotservicethongquavlblayer4-caidatvngcloudcontrollermanager" id="exposemotservicethongquavlblayer4-caidatvngcloudcontrollermanager"></a>
+**Cài đặt VNGCloud BlockStorage CSI Driver**
 
 * Cài đặt Helm phiên bản từ 3.0 trở lên. Tham khảo tại [https://helm.sh/docs/intro/install/](https://helm.sh/docs/intro/install/) để biết cách cài đặt.
-* Thay thế thông tin ClientID, Client Secret và ClusterID của cụm K8S của bạn và tiếp tục chạy:
+* Thêm repo này vào cluster của bạn qua lệnh:
 
-```bash
-helm install vngcloud-load-balancer-controller oci://vcr.vngcloud.vn/81-vks-public/vks-helm-charts/vngcloud-load-balancer-controller \
-  --namespace kube-system \
-  --set mysecret.global.clientID= __________________ \
-  --set mysecret.global.clientSecret= __________________
+```
+helm repo add vks-helm-charts https://vngcloud.github.io/vks-helm-charts
+helm repo update
 ```
 
-* Sau khi việc cài đặt hoàn tất, thực hiện kiểm tra trạng thái của vngcloud-Integrate-controller pods:
+* Thay thế thông tin ClientID, Client Secret và ClusterID của cụm K8S của bạn và tiếp tục chạy:
 
-```bash
-kubectl -n kube-system get pod -l app.kubernetes.io/name=vngcloud-load-balancer-controller
+```
+helm install vngcloud-blockstorage-csi-driver vks-helm-charts/vngcloud-blockstorage-csi-driver \
+  --replace --namespace kube-system \
+  --set vngcloudAccessSecret.keyId=${VNGCLOUD_CLIENT_ID} \
+  --set vngcloudAccessSecret.accessKey=${VNGCLOUD_CLIENT_SECRET} \
+  --set vngcloudAccessSecret.vksClusterId=${VNGCLOUD_VKS_CLUSTER_ID}  # Optional
+```
+
+* Sau khi việc cài đặt hoàn tất, thực hiện kiểm tra trạng thái của vngcloud-blockstorage-csi-driver pods:
+
+```
+kubectl get pods -n kube-system | grep vngcloud-ingress-controller
 ```
 
 Ví dụ như ảnh bên dưới là bạn đã cài đặt thành công vngcloud-controller-manager:
 
-```bash
-NAME                                                              READY   STATUS    RESTARTS   AGE
-vngcloud-load-balancer-controller-1736217866-manager-77599vrxpz   1/1     Running   0          4h24m
+```
+NAME                                           READY   STATUS    RESTARTS       AGE
+vngcloud-csi-controller-56bd7b85f-ctpns        7/7     Running   6 (2d4h ago)   2d4h
+vngcloud-csi-controller-56bd7b85f-npp9n        7/7     Running   2 (2d4h ago)   2d4h
+vngcloud-csi-node-c8r2w                        3/3     Running   0              2d4h
 ```
 
-## 5. Deploy một Workload <a href="#exposemotservicethongquavlblayer7-deploymotworkload" id="exposemotservicethongquavlblayer7-deploymotworkload"></a>
+</details>
+
+***
+
+### Deploy một Workload 
+
+Sau đây là hướng dẫn để bạn deploy service nginx trên Kubernetes.
 
 **Bước 1**: **Tạo Deployment cho Nginx app.**
 
@@ -167,7 +191,7 @@ pod/nginx-app-7f45b65946-t7d7k   1/1     Running   0          16s   172.16.24.20
 
 ***
 
-## **6. Tạo Persistent Volume**
+### **Tạo Persistent Volume**
 
 * Tạo file **persistent-volume.yaml** với nội dung sau:
 
@@ -223,15 +247,17 @@ spec:
 kubectl apply -f persistent-volume.yaml
 ```
 
-Lúc này, hệ thống vServer sẽ tự động tạo một Volume tương ứng với file yaml bên trên.
+Lúc này, hệ thống vServer sẽ tự động tạo một Volume tương ứng với file yaml bên trên, ví dụ:
+
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(18)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1).png?raw=true)
 
 ***
 
-## **7. Tạo Snapshot**
+### **Tạo Snapshot**
 
 Snapshot là phương pháp sao lưu giữ liệu với chi phí thấp, thuận tiện và hiệu quả và có thể được sử dụng để tạo image, phục hồi dữ liệu và phân phối các bản sao dữ liệu. Nếu bạn là người dùng mới chưa từng sử dụng dịch vụ Snapshot, bạn cần thực hiện Activate Snapshot Service (Kích hoạt dịch vụ Snapshot) trước khi có thể tạo Snapshot cho Persistent Volume của bạn.
 
-### **7.1 Activate Snapshot Service**
+#### **Activate Snapshot Service**
 
 Để có thể tạo Snapshot, bạn cần thực hiện Activate Snapshot Service. Bạn sẽ không bị tính phí khi kích hoạt dịch vụ snapshot. Sau khi bạn tạo snapshot, chi phí sẽ được tính dựa trên dung lượng lưu trữ và thời gian lưu trữ của các bản snapshot này. Thực hiện theo các bước sau đây để kích hoạt dịch vụ Snapshot:
 
@@ -239,7 +265,11 @@ Snapshot là phương pháp sao lưu giữ liệu với chi phí thấp, thuận
 
 **Bước 2:** Chọn **Activate Snapshot Service**.
 
-#### **Bước 3: Cài đặt VNGCloud Snapshot Controller**
+Ví dụ:
+
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(19)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1).png?raw=true)
+
+#### **Cài đặt VNGCloud Snapshot Controller**
 
 * Cài đặt Helm phiên bản từ 3.0 trở lên. Tham khảo tại [https://helm.sh/docs/intro/install/](https://helm.sh/docs/intro/install/) để biết cách cài đặt.
 * Thêm repo này vào cluster của bạn qua lệnh:
@@ -271,7 +301,7 @@ snapshot-controller-7fdd984f89-745tg           0/1     ContainerCreating   0    
 snapshot-controller-7fdd984f89-k94wq           0/1     ContainerCreating   0              3s
 ```
 
-**Bước 4:** Tạo file **snapshot.yaml** với nội dung sau:
+#### Tạo file **snapshot.yaml** với nội dung sau:
 
 ```
 apiVersion: snapshot.storage.k8s.io/v1
@@ -302,7 +332,7 @@ kubectl apply -f snapshot.yaml
 
 ***
 
-## **8. Kiểm tra PVC và Snapshot vừa tạo**
+### **Kiểm tra PVC và Snapshot vừa tạo**
 
 * Sau khi apply tập tin thành công, bạn có thể kiểm tra danh sách service, pvc thông qua:
 
@@ -325,7 +355,7 @@ pod/nginx-app-7f45b65946-t7d7k   1/1     Running   0          94m   172.16.24.20
 
 ***
 
-### 8.1 Thay đổi thông số IOPS của Persistent Volume vừa tạo
+### Thay đổi thông số IOPS của Persistent Volume vừa tạo
 
 \
 Để thay đổi thông số IOPS của Persistent Volume vừa tạo, hãy thực hiện theo các bước sau đây:
@@ -382,7 +412,7 @@ status:
 
 * Nếu bạn đã chỉnh sửa IOPS của Persistent Volume lần nào trước đó, khi bạn chạy lệnh trên, tệp tin yaml của bạn đã có sẵn annotation bs.csi.vngcloud.vn/volume-type: "volume-type-id" . Lúc này, hãy chỉnh sửa annotation này về Volume type id có IOPS mà bạn mong muốn.
 
-### 8.2 Thay đổi Disk Volume của Persistent Volume vừa tạo
+### Thay đổi Disk Volume của Persistent Volume vừa tạo
 
 \
 Để thay đổi Disk Volume của Persistent Volume vừa tạo, hãy thực hiện chạy lệnh sau:
@@ -393,13 +423,11 @@ Ví dụ: ban đầu PVC được tạo có kích cỡ 20 Gi, hiện tại tôi 
 kubectl patch pvc my-expansion-pvc -p '{"spec":{"resources":{"requests":{"storage":"30Gi"}}}}'
 ```
 
-{% hint style="info" %}
-Chú ý:
+> Chú ý:
+>
+> * Bạn chỉ có thể thực hiện tăng Disk Volume mà không thể thực hiện giảm kích thước Disk Volume này.
 
-* Bạn chỉ có thể thực hiện tăng Disk Volume mà không thể thực hiện giảm kích thước Disk Volume này.
-{% endhint %}
-
-### 8.3 Restore Persistent Volume từ Snapshot
+### Restore Persistent Volume từ Snapshot
 
 Để khôi phục Persistent Volume từ Snapshot, bạn hãy thực hiện theo các bước sau:
 

@@ -12,7 +12,7 @@ Tính năng Auto Scaling cho phép vLB tự động điều chỉnh số lượn
 
 * Auto Scaling **chỉ có thể được bật khi khởi tạo vLB** và **không thể tắt** sau đó. Nếu bạn khởi tạo LoadBalancer thông qua vLB Portal, hãy chọn option: **Enable auto scaling**.
 
-<figure><img src="../../.gitbook/assets/image.png" alt="" width="196"><figcaption></figcaption></figure>
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image.png?raw=true)
 
 * Nếu LoadBalancer của bạn được khởi tạo tự động thông qua hệ thống VKS, vui lòng thêm annotation `vks.vngcloud.vn/enable-autoscale: true` ngay khi tạo service LoadBalancer hay Ingress với Class vngcloud. Việc cập nhật annotation này sau khi LoadBalancer này đã được tạo sẽ không có tác dụng. Ví dụ:
 
@@ -93,14 +93,12 @@ spec:
   * **Scaling in (Thu hẹp):**
     * Khi ngưỡng giảm xuống dưới 20% active connection/max connection trong 3 phút liên tục, hệ thống sẽ tự động xóa 1 LB thành viên.
 
-{% hint style="info" %}
-**Chú ý:**
-
-* **Tính năng Resize bị vô hiệu hóa:** Đối với các vLB đã bật Auto Scaling, bạn không thể thay đổi gói dịch vụ (resize) thủ công.
-* **Trạng thái Scaling:** Trong quá trình mở rộng hoặc thu hẹp quy mô LB, trạng thái của LB sẽ chuyển từ "Active" sang "Scaling in/Scaling out". Sau khi hoàn tất, trạng thái sẽ trở lại "Active".
-* **Thời gian Scaling:** Thời gian để scale lên hoặc xuống 1 LB role Slave là khoảng 5-10 phút, kể từ thời điểm connection vượt ngưỡng cho phép, tùy thuộc vào số lượng listener của LB đó.
-* **Phân giải CNAME**: Đối với các LB bật tính năng auto scale, hệ thống sẽ tự động tạo tên miền cho cụm LB theo template `lb_name-{userid}.{region}.vlb.vngcloud.vn`. Sau đó, người dùng cần chủ động cập nhật bản ghi CNAME để trỏ tên miền riêng đến tên miền của LB. Khi có sự thay đổi về số lượng LB slave (scale up/down), hệ thống sẽ tự động cập nhật bản ghi DNS tương ứng với tên miền LB.
-{% endhint %}
+> **Chú ý:**
+>
+> * **Tính năng Resize bị vô hiệu hóa:** Đối với các vLB đã bật Auto Scaling, bạn không thể thay đổi gói dịch vụ (resize) thủ công.
+> * **Trạng thái Scaling:** Trong quá trình mở rộng hoặc thu hẹp quy mô LB, trạng thái của LB sẽ chuyển từ "Active" sang "Scaling in/Scaling out". Sau khi hoàn tất, trạng thái sẽ trở lại "Active".
+> * **Thời gian Scaling:** Thời gian để scale lên hoặc xuống 1 LB role Slave là khoảng 5-10 phút, kể từ thời điểm connection vượt ngưỡng cho phép, tùy thuộc vào số lượng listener của LB đó.
+> * **Phân giải CNAME**: Đối với các LB bật tính năng auto scale, hệ thống sẽ tự động tạo tên miền cho cụm LB theo template `lb_name-{userid}.{region}.vlb.vngcloud.vn`. Sau đó, người dùng cần chủ động cập nhật bản ghi CNAME để trỏ tên miền riêng đến tên miền của LB. Khi có sự thay đổi về số lượng LB slave (scale up/down), hệ thống sẽ tự động cập nhật bản ghi DNS tương ứng với tên miền LB.
 
 ## **Xem lịch sử Scaling**
 

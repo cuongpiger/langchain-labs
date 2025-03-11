@@ -12,17 +12,17 @@
   * **Security Upgrades**: Vá các lỗ hổng bảo mật, đảm bảo an toàn dữ liệu.
   * **Stability Upgrades**: Sửa các lỗi nghiêm trọng ảnh hưởng đến sự ổn định của hệ thống.
 * **Thời gian thực hiện**:
-  * Các nâng cấp này sẽ được hệ thống VKS tự động thực hiện <mark style="color:red;">**sau 8 giờ tối vào bất kỳ ngày nào**</mark> nếu cần, nhằm giảm thiểu ảnh hưởng đến bạn. Chúng tôi sẽ thông báo cho bạn về các nâng cấp này trong thời gian sớm nhất.
+  * Các nâng cấp này sẽ được hệ thống VKS tự động thực hiện ****sau 8 giờ tối vào bất kỳ ngày nào**** nếu cần, nhằm giảm thiểu ảnh hưởng đến bạn. Chúng tôi sẽ thông báo cho bạn về các nâng cấp này trong thời gian sớm nhất.
 
 **2. Regular Upgrades (Nâng cấp thông thường)**
 
 * **Mục đích**: Các nâng cấp định kỳ theo **upgrade window** mà bạn chỉ định nhằm giúp cluster của bạn luôn cập nhật với các phiên bản mới nhất, bao gồm cả **minor version** và **patch version**.
-* **Cụ thể**:&#x20;
+* **Cụ thể**: 
   * **Minor Version Upgrades**: Cập nhật các tính năng và API mới. Ví dụ, nếu cluster hiện tại đang sử dụng phiên bản 1.28.2, hệ thống sẽ tự động nâng cấp lên phiên bản 1.29.6.
   * **Patch Version Upgrades**: Vá lỗi nhỏ và cải thiện hiệu suất. Ví dụ, nếu cluster hiện tại đang sử dụng phiên bản 1.29.1, hệ thống sẽ tự động nâng cấp lên phiên bản 1.29.2.
 *   **Thời gian thực hiện**:
 
-    * Bạn có thể tự cấu hình lịch trình nâng cấp thông qua **VKS Portal** theo hướng dẫn dưới đây. Sau khi bạn chọn lịch auto-upgrade qua VKS Portal, hệ thống sẽ **bắt đầu thực hiện nâng cấp sau ít nhất&#x20;**<mark style="color:red;">**6 ngày**</mark> kể từ ngày hiện tại. Thời gian này giúp bạn có đủ thời gian để chuẩn bị và kiểm tra trước khi nâng cấp diễn ra.
+    * Bạn có thể tự cấu hình lịch trình nâng cấp thông qua **VKS Portal** theo hướng dẫn dưới đây. Sau khi bạn chọn lịch auto-upgrade qua VKS Portal, hệ thống sẽ **bắt đầu thực hiện nâng cấp sau ít nhất ******6 ngày**** kể từ ngày hiện tại. Thời gian này giúp bạn có đủ thời gian để chuẩn bị và kiểm tra trước khi nâng cấp diễn ra.
     * Hệ thống sẽ **lặp lại cho các tuần kế tiếp** kể từ lần nâng cấp trước đó và tuân theo các ngày đã được bạn chọn.
     * **Trước mỗi lần nâng cấp**, hệ thống sẽ gửi một **email thông báo** cho bạn trước 6 ngày tính tới thời điểm chạy auto-upgrade thực tế. Trong email, chúng tôi sẽ nêu rõ thời gian cụ thể mà việc auto-upgrade sẽ diễn ra.
     * Nếu **chọn nhiều ngày trong tuần** (như Thứ Hai, Thứ Năm), hệ thống sẽ tính toán chu kỳ nâng cấp cho các ngày đã chọn, không ảnh hưởng đến các ngày khác.
@@ -75,11 +75,9 @@ _**Lịch Thứ Hai(12:00 PM)**:_
 
 </details>
 
-{% hint style="info" %}
-**Chú ý:**
-
-* Hệ thống VKS **sẽ cố gắng thực hiện nâng cấp** theo lịch trình mà bạn đã cấu hình qua **VKS Portal**. Tuy nhiên, tùy thuộc vào tải của hệ thống, **một số lần nâng cấp có thể bị hoãn** hoặc không thực hiện đúng như lịch. Khi đó, hệ thống sẽ tự động chuyển lịch nâng cấp sang **thời điểm thích hợp tiếp theo**, chính là chu kỳ lặp lại trong tuần tiếp theo.
-{% endhint %}
+> **Chú ý:**
+>
+> * Hệ thống VKS **sẽ cố gắng thực hiện nâng cấp** theo lịch trình mà bạn đã cấu hình qua **VKS Portal**. Tuy nhiên, tùy thuộc vào tải của hệ thống, **một số lần nâng cấp có thể bị hoãn** hoặc không thực hiện đúng như lịch. Khi đó, hệ thống sẽ tự động chuyển lịch nâng cấp sang **thời điểm thích hợp tiếp theo**, chính là chu kỳ lặp lại trong tuần tiếp theo.
 
 ***
 
@@ -104,7 +102,7 @@ Bên dưới là hướng dẫn thực hiện cập nhật Upgrade Policy trên 
 * **Chọn một hoặc nhiều ngày** trong tuần mà hệ thống VKS có thể thực hiện auto-upgrade (ví dụ: Monday, Tuesday, ...).
 * **Chọn một mốc thời gian** cụ thể mà bạn mong muốn hệ thống VKS thực hiện auto-upgrade (ví dụ: 20:00 (08:00 PM - theo múi giờ UTC+07:00)
 
-<figure><img src="../../.gitbook/assets/image (88).png" alt=""><figcaption></figcaption></figure>
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1).png?raw=true)
 
 **Bước 5:** Chọn **Create Kubernetes cluster/ Update Cluster.** Hãy chờ vài phút để chúng tôi khởi tạo/ chỉnh sửa Cluster của bạn, trạng thái của Cluster lúc này là **Creating/ Updating**.
 
@@ -135,7 +133,7 @@ Riêng đối với trường hợp Force Upgrade, khi phát hiện ra Kubernete
 
 ### **Regular Upgrades**
 
-Regular Upgrades bao gồm các nâng cấp **Minor** và **Patch** nhằm cải thiện hiệu năng, tính năng mới, và sửa các lỗi nhỏ trong hệ thống Kubernetes. Bạn có thể tự cấu hình lịch Regular Upgrades thông qua **VKS Portal**. Hệ thống sẽ cố gắng thực hiện nâng cấp trong cluster theo ngày, giờ mà bạn đã chỉ định.&#x20;
+Regular Upgrades bao gồm các nâng cấp **Minor** và **Patch** nhằm cải thiện hiệu năng, tính năng mới, và sửa các lỗi nhỏ trong hệ thống Kubernetes. Bạn có thể tự cấu hình lịch Regular Upgrades thông qua **VKS Portal**. Hệ thống sẽ cố gắng thực hiện nâng cấp trong cluster theo ngày, giờ mà bạn đã chỉ định. 
 
 Trước khi thực hiện Regular Upgrade, hệ thống sẽ gửi email thông báo chi tiết cho bạn, bao gồm:
 
@@ -161,7 +159,7 @@ Khi nâng cấp cluster, hai thành phần chính được nâng cấp:
 Quy trình nâng cấp node group:
 
 * **Bước 1:** Hệ thống VKS thực hiện xác định các node cần nâng cấp.
-* **Bước 2:** Hệ thống VKS thực hiện drain node, tức là di chuyển tất cả các pod đang chạy trên node cũ chưa nâng cấp này sang các node khác.&#x20;
+* **Bước 2:** Hệ thống VKS thực hiện drain node, tức là di chuyển tất cả các pod đang chạy trên node cũ chưa nâng cấp này sang các node khác. 
 * **Bước 3:** Hệ thống sẽ tạo lại node mới với cấu hình đã được thiết lập trên node group và thực hiện join node này vào cụm. Nếu sau khi khởi động lại, node vẫn báo cáo trạng thái "NotReady", hệ thống sẽ tiếp tục khởi động lại node cho đến khi node trở lại trạng thái hoạt động bình thường.
 
 Nếu **surge upgrades** được kích hoạt, hệ thống sẽ tạo tối đa 10 node mới trước khi bắt đầu nâng cấp các node hiện tại. Điều này giúp đảm bảo workload có đủ tài nguyên chạy trong suốt quá trình nâng cấp.
@@ -172,7 +170,7 @@ Nếu **surge upgrades** được kích hoạt, hệ thống sẽ tạo tối đ
   * Đảm bảo các pod quan trọng luôn có số lượng replicas >=2.
   * Sử dụng Deployment hoặc StatefulSet để tự động quản lý pods.
 * **Pod Disruption Budget (PDB) Cấu Hình Quá Nhỏ:** PDB giới hạn số lượng pod có thể bị gián đoạn tại một thời điểm. Nếu cấu hình quá nhỏ, quá trình nâng cấp có thể bị treo. **Giải pháp:**
-  * Cấu hình PDB phù hợp với yêu cầu của ứng dụng (ví dụ: cho phép ít nhất 1 pod luôn hoạt động).&#x20;
+  * Cấu hình PDB phù hợp với yêu cầu của ứng dụng (ví dụ: cho phép ít nhất 1 pod luôn hoạt động). 
 * **Persistent Volume (PV) Không Được Cấu Hình Với ReadWriteMany:** PV với chế độ `ReadWriteOnce` chỉ có thể được gắn vào một node duy nhất. Khi node này nâng cấp, PV cần được di chuyển, gây downtime. **Giải pháp:**
   * Sử dụng chế độ `ReadWriteMany` nếu ứng dụng yêu cầu dữ liệu khả dụng trên nhiều node.
 * **Pods Thiếu Liveness và Readiness Probes:** Nếu không có probes, Kubernetes không thể xác định trạng thái của pod, dẫn đến routing sai hoặc downtime. **Giải pháp:**
@@ -191,4 +189,4 @@ Ngoài ra, để việc upgrade diễn ra thành công, bạn cũng cần xem x�
 
 Trong trường hợp bạn muốn chủ động kiểm soát việc nâng cấp Kubernetes Cluster (manually upgrade) và không muốn hệ thống tự động thực hiện nâng cấp, bạn có thể tắt tính năng **Regular Upgrade** bằng cách bỏ chọn **Enable Automatic Upgrade**.
 
-<figure><img src="../../.gitbook/assets/image (89).png" alt=""><figcaption></figcaption></figure>
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(2)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1).png?raw=true)

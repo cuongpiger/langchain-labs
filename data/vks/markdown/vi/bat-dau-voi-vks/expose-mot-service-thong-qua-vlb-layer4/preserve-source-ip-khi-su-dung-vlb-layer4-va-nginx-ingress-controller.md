@@ -1,12 +1,10 @@
 # Preserve Source IP khi sử dụng vLB Layer4 và Nginx Ingress Controller
 
-## 1. Giới thiệu
-
 **Preserve Source IP** khi sử dụng vLB Layer 4 và Nginx Ingress Controller trong Kubernetes là quá trình duy trì địa chỉ IP gốc của client khi traffic được chuyển tiếp qua load balancer và vào cụm Kubernetes. Điều này rất quan trọng trong một số trường hợp khi bạn cần các thông tin chi tiết về kết nối của client, chẳng hạn như địa chỉ IP gốc và port gốc của client, để có thể thực hiện các quyết định xử lý traffic hoặc logging chính xác. Bên dưới là hướng dẫn cụ thể của chúng tôi để giúp bạn có thể thực hiện usecase này.
 
 ***
 
-## 2. Điều kiện cần
+### Điều kiện cần
 
 * Bạn đã thực hiện khởi tạo Cluster trên hệ thống VKS theo các hướng dẫn tại [đây ](./)và trên cụm của bạn đã được cài đặt **VNGCloud LoadBalancer Controller.**
 * Tiếp theo, bạn cần thực hiện cài đặt nginx-ingress-controller theo lệnh:
@@ -17,7 +15,7 @@ helm install nginx-ingress-controller oci://ghcr.io/nginxinc/charts/nginx-ingres
 
 ***
 
-## **3. Cấu hình ConfigMap cho Nginx Ingress Controller**
+### **Cấu hình ConfigMap cho Nginx Ingress Controller**
 
 * Thêm vào ConfigMap của Nginx Ingress Controller các thiết lập để kích hoạt proxy protocol thông qua lệnh:
 
@@ -48,7 +46,7 @@ data:
 
 ***
 
-## 4. Cấu hình vLB Layer 4
+### Cấu hình vLB Layer 4
 
 * Tiếp theo, bạn cần cấu hình vLB Layer4 cho phép sử dụng proxy protocol cho service Load Balancer Nginx. Giá trị truyền vào là danh sách các service name trong Load Balancer sử dụng Proxy Protocol.
 
@@ -61,7 +59,7 @@ kubectl annotate service -n kube-system nginx-ingress-controller-controller \
 
 ***
 
-## 5. Cấu hình cụ thể
+### Cách sử dụng
 
 * Giả sử, bạn có một service prometheus-node-exporter với port 9100 trong namespace default, bạn có thể apply yaml sau để có thể truy cập thông qua NLB
 
@@ -88,8 +86,8 @@ spec:
 
 * Sau đó tôi sử dụng IP 103.245.252.75 để curl vào host kkk.example.com như sau:
 
-<figure><img src="../../../.gitbook/assets/image (803).png" alt=""><figcaption></figcaption></figure>
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(383).png?raw=true)
 
 * Kết quả log ghi nhận được đã có thông tin Client IP này như hình:
 
-<figure><img src="../../../.gitbook/assets/image (804).png" alt=""><figcaption></figcaption></figure>
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(384).png?raw=true)

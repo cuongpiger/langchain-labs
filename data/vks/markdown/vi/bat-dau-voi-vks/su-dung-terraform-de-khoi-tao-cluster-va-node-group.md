@@ -45,17 +45,15 @@ variable "client_secret" {
   * Tên Node Group: my-nodegroup
   * Bật AutoScaling: scale từ 0 tới 5 nodes
 
-{% hint style="info" %}
-**Chú ý:**
-
-* Trong file main.tf, để khởi tạo một cluster với một node group, bạn bắt buộc cần truyền vào các thông số sau: &#x20;
-
-```hcl
-  vpc_id    = "net-xxxxxxxx-xxxx-xxxxx-xxxx-xxxxxxxxxxxx"
-  subnet_id = "sub-xxxxxxxx-xxxx-xxxxx-xxxx-xxxxxxxxxxxx"
-  ssh_key_id= "ssh-xxxxxxxx-xxxx-xxxxx-xxxx-xxxxxxxxxxxx"
-```
-{% endhint %}
+> **Chú ý:**
+>
+> * Trong file main.tf, để khởi tạo một cluster với một node group, bạn bắt buộc cần truyền vào các thông số sau:  
+>
+> ```hcl
+>   vpc_id    = "net-xxxxxxxx-xxxx-xxxxx-xxxx-xxxxxxxxxxxx"
+>   subnet_id = "sub-xxxxxxxx-xxxx-xxxxx-xxxx-xxxxxxxxxxxx"
+>   ssh_key_id= "ssh-xxxxxxxx-xxxx-xxxxx-xxxx-xxxxxxxxxxxx"
+> ```
 
 * File `main.tf` mẫu giúp bạn tạo Cluster và Node Group theo cấu hình bên trên:
 
@@ -128,4 +126,4 @@ resource "vngcloud_vks_cluster_node_group" "primary" {
 
 * Chạy lệnh `terraform apply.` Lệnh này sẽ tạo Cluster Kubernetes theo mô tả trong tệp `main.tf`.
 
-Tham khảo thêm về cách sử dụng Terraform để làm việc với VKS tại [đây](https://registry.terraform.io/providers/vngcloud/vngcloud/latest/docs/resources/vks_cluster).
+Tham khảo thêm về cách sử dụng Terraform để làm việc với VKS tại [đây](https://registry.terraform.io/providers/vngcloud/vngcloud/latest/docs/resources/vks\_cluster).

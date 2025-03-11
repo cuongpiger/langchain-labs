@@ -26,10 +26,10 @@ Bên cạnh đó, các kết nối hoạt động như sau:
 Hiện tại, VKS đang cung cấp 3 plugin CNI phổ biến là Calico Overlay, Cilium Overlay, Cilium VPC Native Routing. Trong đó:
 
 * **Calico Overlay**: Sử dụng mô hình overlay thông qua tunneling (**IP-in-IP**). Tương thích với nhiều hạ tầng nhưng hiệu suất có thể bị ảnh hưởng bởi **overhead** từ tunnel.
-* **Cilium Overlay**: Cũng sử dụng mô hình overlay nhưng có sự tích hợp mạnh mẽ với **eBPF**, giúp cải thiện hiệu suất, bảo mật, và khả năng mở rộng.&#x20;
+* **Cilium Overlay**: Cũng sử dụng mô hình overlay nhưng có sự tích hợp mạnh mẽ với **eBPF**, giúp cải thiện hiệu suất, bảo mật, và khả năng mở rộng. 
 * **Cilium VPC Native Routing**: Sử dụng **eBPF** và **không cần overlay**, tận dụng khả năng routing của hạ tầng VPC, mang lại hiệu suất và khả năng mở rộng tốt nhất.
 
-**Khi nào nên sử dụng Calico Overlay**: đơn giản trong việc sử dụng, không yêu cầu hiệu suất quá cao.&#x20;
+**Khi nào nên sử dụng Calico Overlay**: đơn giản trong việc sử dụng, không yêu cầu hiệu suất quá cao. 
 
 **Khi nào nên sử dụng Cilium Overlay**: đơn giản trong việc sử dụng, không yêu cầu hiệu suất quá cao tuy nhiên có nhu cầu monitor chuyên sâu (Hubble).
 

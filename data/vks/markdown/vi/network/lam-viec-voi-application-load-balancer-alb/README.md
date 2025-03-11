@@ -1,14 +1,14 @@
 # Làm việc với Application Load Balancer (ALB)
 
-## Tổng quan <a href="#workingwithapplicationloadbalancer-alb-tongquan" id="workingwithapplicationloadbalancer-alb-tongquan"></a>
+## Tổng quan 
 
-### ALB là gì? <a href="#workingwithapplicationloadbalancer-alb-alblagi" id="workingwithapplicationloadbalancer-alb-alblagi"></a>
+### ALB là gì? 
 
 * Application Load Balancer (ALB) là một công cụ trong hạ tầng mạng và máy chủ được sử dụng để phân phối lưu lượng mạng đến nhiều máy chủ hoặc máy ảo để cải thiện hiệu suất và khả năng sẵn sàng của các ứng dụng. ALB hoạt động ở tầng ứng dụng, cho phép phân phối lưu lượng dựa trên nhiều yếu tố như loại yêu cầu, trạng thái của máy chủ và thuật toán phân phối tải. ALB cung cấp khả năng route nâng cao, cho phép điều hướng lưu lượng dựa trên các Host hay Path Header. Nó cũng hỗ trợ tính năng duy trì phiên, giúp duy trì liên tục phiên của người dùng đối với cùng một máy chủ. Điều này rất hữu ích cho các ứng dụng yêu cầu sự nhất quán trong quá trình tương tác của người dùng. Để biết thêm thông tin chi tiết về ALB, vui lòng tham khảo tại \[How it works (ALB)]
 
-### Mô hình triển khai <a href="#workingwithapplicationloadbalancer-alb-mohinhtrienkhai" id="workingwithapplicationloadbalancer-alb-mohinhtrienkhai"></a>
+### Mô hình triển khai 
 
-<figure><img src="../../../.gitbook/assets/image (427).png" alt=""><figcaption></figcaption></figure>
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(6)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1).png?raw=true)
 
 **Ngoài các thành phần cơ bản của một cụm K8S và một ALB mà bạn đã biết, trong mô hình này chúng tôi sử dụng:**
 

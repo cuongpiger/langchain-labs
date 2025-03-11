@@ -1,10 +1,12 @@
 # VKS là gì?
 
-1. Giới thiệu VKS
-
 VKS (VNGCloud Kubernetes Service) là một dịch vụ được quản lý trên VNGCloud giúp bạn đơn giản hóa quá trình triển khai và quản lý các ứng dụng dựa trên container. Kubernetes là một nền tảng mã nguồn mở được phát triển bởi Google, được sử dụng rộng rãi để quản lý và triển khai các ứng dụng container trên môi trường phân tán.
 
-2. Những điểm nổi bật của VKS
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(2)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1).png?raw=true)
+
+***
+
+## Những điểm nổi bật của VKS 
 
 * **Quản lý Control Plane hoàn toàn tự động (Fully Managed control plane):** VKS sẽ giải phóng bạn khỏi gánh nặng quản lý Control Plane của Kubernetes, giúp bạn tập trung vào việc phát triển ứng dụng.
 * **Hỗ trợ các phiên bản Kubernetes mới nhất:** VKS luôn cập nhật những phiên bản Kubernetes mới nhất (minor version từ 1.27, 1.28, 1.29) để đảm bảo bạn luôn tận dụng được những tính năng tiên tiến nhất.
@@ -21,9 +23,13 @@ VKS (VNGCloud Kubernetes Service) là một dịch vụ được quản lý trê
 * Dễ sử dụng: VKS cung cấp giao diện đơn giản và dễ sử dụng.
 * Chi phí hợp lý: VKS cung cấp mức giá cạnh tranh cho các dịch vụ của mình.
 
-3. Region triển khai
+***
+
+### **Region** 
 
 Hiện tại, trên VKS, chúng tôi đang cung cấp cho bạn 2 cơ sở hạ tầng riêng biệt được đặt tại Hà Nội và Hồ Chí Minh. Bạn có thể lựa chọn sử dụng VKS trên mỗi region tùy thuộc vào vị trí và nhu cầu thực tế của bạn. Đối với 2 farm HCM03, HAN01, các thông số cụ thể cho mỗi region được chúng tôi cung cấp như sau:
 
-* Farm: HCM03 với domain: [https://vks.console.vngcloud.vn](https://vks.console.vngcloud.vn/overview)
-* Farm: HAN01 với domain: [https://vks-han-1.console.vngcloud.vn](https://vks-han-1.console.vngcloud.vn/overview)
+| Farm | Domain |
+| --- | --- |
+| HCM03 | [https://vks.console.vngcloud.vn](https://vks.console.vngcloud.vn/overview) |
+| HAN01 | [https://vks-han-1.console.vngcloud.vn](https://vks-han-1.console.vngcloud.vn/overview) |

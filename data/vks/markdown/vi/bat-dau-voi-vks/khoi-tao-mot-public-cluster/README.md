@@ -2,7 +2,7 @@
 
 ## **Model**
 
-<figure><img src="../../../.gitbook/assets/image (1126).png" alt=""><figcaption></figcaption></figure>
+![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(692).png?raw=true)
 
 Khi bạn khởi tạo một **Public Cluster với Public Node Group**, hệ thống VKS sẽ:
 

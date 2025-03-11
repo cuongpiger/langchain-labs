@@ -1,187 +1,425 @@
 # Hướng dẫn cài đặt và cấu hình công cụ kubectl trong Kubernetes
 
-### 1. Điều kiện Cần
+## Điều kiện cần 
 
-Bạn cần sử dụng phiên bản kubectl không chênh lệch quá một phiên bản với version của cluster. Ví dụ, một client v1.2 có thể hoạt động với master v1.1, v1.2 và v1.3. Sử dụng phiên bản mới nhất của kubectl giúp tránh các vấn đề không lường trước.
+Bạn cần phải sử dụng phiên bản kubectl sai lệch không quá một phiên bản với version của cluster. Ví dụ, một client v1.2 nên được hoạt động với master v1.1, v1.2 và v1.3. Sử dụng phiên bản mới nhất của kubectl giúp tránh được các vấn đề không lường trước được.
 
-### 2. Hướng dẫn Cài đặt kubectl
+***
 
-#### 2.1 Cài đặt kubectl Binary với cURL trên Linux
+## **Cài đặt kubectl trên Linux** 
 
-**Bước 1:** Tải về phiên bản mới nhất:
+### Cài đặt kubectl binary với curl trên Linux 
 
-```bash
+**Bước 1:** Tải về phiên bản mới nhất với câu lệnh:
+
+```
 curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 ```
 
-Để tải về phiên bản cụ thể, thay thế phần `$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)` bằng phiên bản cụ thể. Ví dụ, tải phiên bản v1.17.0:
+Để tải về phiên bản cụ thể, hãy thay thế phần `$(curl -s https://`[`storage`](https://www.thegioimaychu.vn/storage/)`.`[`googleapis.com/kubernetes-release/release/stable.txt`](http://googleapis.com/kubernetes-release/release/stable.txt)`)` trong câu lệnh với một phiên bản cụ thể.
 
-```bash
+Ví dụ, để tải về phiên bản v1.17.0 trên Linux, hãy chạy lệnh:
+
+```
 curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/linux/amd64/kubectl
 ```
 
-**Bước 2:** Cấp quyền thực thi:
+**Bước 2:** Tạo kubectl binary thực thi qua lệnh: 
 
-```bash
+```
 chmod +x ./kubectl
 ```
 
-**Bước 3:** Di chuyển binary vào thư mục PATH:
+**Bước 3:** Đưa bản binary vào biến môi trường PATH của bạn qua lệnh:
 
-```bash
+```
 sudo mv ./kubectl /usr/local/bin/kubectl
 ```
 
-**Bước 4:** Kiểm tra phiên bản:
+**Bước 4:** Kiểm tra chắc chắn rằng phiên bản bạn cài là mới nhất qua lệnh: 
 
-```bash
-kubectl version --client
+```
+kubectl version
 ```
 
-#### 2.2 Cài đặt kubectl bằng Trình Quản lý Gói
+### Cài đặt kubectl sử dụng trình quản lý gói 
 
-**Trên CentOS, RHEL, Fedora:**
+* Với các hệ điều hành CentOS, RHEL hoặc Fedora, bạn có thể chạy lệnh: 
 
-```bash
-sudo yum install -y kubectl
+```
+sudo apt-get update && sudo apt-get install -y apt-transport-httpscurl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -echo "deb 
+https://apt.kubernetes.io/
+ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.listsudo apt-get updatesudo apt-get install -y kubectl
 ```
 
-**Trên Ubuntu, Debian:**
+### Cài đặt kubectl với snap 
 
-```bash
-sudo apt-get update && sudo apt-get install -y kubectl
+Nếu bạn đang sử dụng Ubuntu hoặc distro Linux khác hỗ trợ trình quản lý gói [snap](https://snapcraft.io/docs/core/install), thì kubectl đã có sẵn trong [snap](https://snapcraft.io/).
+
+**Bước 1:** Chuyển sang user snap và thực thi câu lệnh cài đặt:
+
 ```
-
-***
-
-#### 2.3 Cài đặt kubectl với Snap (Ubuntu/Linux hỗ trợ Snap)
-
-**Bước 1:** Cài đặt kubectl:
-
-```bash
 sudo snap install kubectl --classic
 ```
 
-**Bước 2:** Kiểm tra phiên bản:
+**Bước 2:** Kiểm tra phiên bản bạn vừa cài là mới nhất:
 
-```bash
-kubectl version --client
+```
+kubectl version
 ```
 
 ***
 
-#### 2.4 Cài đặt kubectl trên macOS
+## **Cài đặt kubectl trên macOS** 
 
-**Cài đặt với cURL**
+### Cài đặt kubectl binary với curl trên macOS 
 
-**Bước 1:** Tải phiên bản mới nhất:
+**Bước 1:** Tải về phiên bản mới nhất:
 
-```bash
-curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/darwin/amd64/kubectl
+```
+kubectl versioncurl -LO "
+https://storage.googleapis.com/kubernetes-release/release/$(curl
+ -s 
+https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
+"
 ```
 
-**Bước 2:** Cấp quyền thực thi:
+Để tải về phiên bản cụ thể, hãy thay thế phần `$(curl -s` [`https://storage.googleapis.com/kubernetes-release/release/stable.txt`](https://storage.googleapis.com/kubernetes-release/release/stable.txt)`)` trong câu lệnh với phiên bản cụ thể.\
+Ví dụ, để tải về phiên bản v1.17.0 trên macOS, hãy chạy lệnh:
 
-```bash
+```
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/darwin/amd64/kubectl
+```
+
+**Bước 2:** Tạo kubectl binary thực thi qua lệnh:
+
+```
 chmod +x ./kubectl
 ```
 
-**Bước 3:** Di chuyển binary vào thư mục PATH:
+**Bước 3:** Đưa bản binary vào biến môi trường PATH của bạn qua lệnh: 
 
-```bash
+```
 sudo mv ./kubectl /usr/local/bin/kubectl
 ```
 
-**Bước 4:** Kiểm tra phiên bản:
+**Bước 4:** Kiểm tra chắc chắn rằng phiên bản bạn cài là mới nhất qua lệnh:
 
-```bash
-kubectl version --client
+```
+kubectl version
 ```
 
-**Cài đặt với Homebrew**
+### Cài đặt với Homebrew trên macOS 
 
-```bash
+Nếu bạn đang trên macOS và sử dụng trình quản lý gói [Homebrew](https://brew.sh/), bạn có thể cài đặt kubectl với Homebrew.
+
+**Bước 1:** Chạy câu lệnh cài đặt:
+
+```
+brew install kubernetes-cli
+```
+
+hoặc lệnh: 
+
+```
 brew install kubectl
 ```
 
+**Bước 2:** Kiểm tra chắc chắn rằng phiên bản bạn cài là mới nhất:
+
+```
+kubectl version
+```
+
+### Cài đặt với Macports trên macOS 
+
+Nếu bạn đang trên macOS và sử dụng trình quản lý gói [Macports](https://macports.org/), bạn có thể cài đặt kubectl với Macports.
+
+**Bước 1:** Chạy câu lệnh cài đặt:
+
+```
+sudo port selfupdatesudo port install kubectl
+```
+
+**Bước 2:** Kiểm tra chắc chắn rằng phiên bản bạn cài là mới nhất:
+
+```
+sudo port selfupdatesudo port install kubectl
+```
+
 ***
 
-#### 2.5 Cài đặt kubectl trên Windows
+## **Cài đặt kubectl trên Windows** 
 
-**Cài đặt với cURL**
+### Cài đặt kubectl binary với curl trên Windows 
 
-**Bước 1:** Tải về binary:
+**Bước 1:** Tải về phiên bản mới nhất v1.17.0 từ [đường dẫn này](https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/windows/amd64/kubectl.exe).Hoặc nếu bạn đã cài đặt `curl`, hãy sử dụng câu lệnh sau:
 
-```powershell
+```
 curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/windows/amd64/kubectl.exe
 ```
 
-**Bước 2:** Thêm vào biến môi trường PATH.
+Để tìm ra phiên bản ổn định mới nhất, hãy xem [https://storage.googleapis.com/kubernetes-release/release/stable.txt](https://storage.googleapis.com/kubernetes-release/release/stable.txt).
 
-**Bước 3:** Kiểm tra phiên bản:
+**Bước 2:** Đưa bản binary vào biến môi trường PATH của bạn.
 
-```powershell
-kubectl version --client
+**Bước 3:** Kiểm tra chắn chắn phiên bản `kubectl` giống với bản đã tải về:
+
+```
+kubectl version
 ```
 
-**Cài đặt với Chocolatey**
+> **Ghi chú:** [Docker Desktop cho Windows](https://docs.docker.com/docker-for-windows/#kubernetes) thêm phiên bản `kubectl` riêng của nó vào PATH. Nếu bạn đã cài đặt Docker Desktop trước đây, bạn có thể cần đặt đường dẫn PATH của bạn trước khi bản cài đặt Docker Desktop thêm 1 PATH vào hoặc loại bỏ `kubectl` của Docker Desktop.
 
-```powershell
+### Cài đặt với Powershell từ PSGallery 
+
+Nếu bạn đang ở trên Windows và sử dụng trình quản lý gói [Powershell Gallery](https://www.powershellgallery.com/), bạn có thể cài đặt và cập nhật kubectl với Powershell.
+
+**Bước 1:** Thực thi các câu lệnh cài đặt sau (hãy đảm bảo bạn tự định nghĩa `DownloadLocation`):
+
+```
+Install-Script -Name install-kubectl -Scope CurrentUser -Forceinstall-kubectl.ps1 [-DownloadLocation <path>]
+```
+
+> **Ghi chú:** Nếu bạn không định nghĩa `DownloadLocation`, `kubectl` sẽ được cài đặt ở thư mục temp của user.
+
+Bản cài đặt sẽ tạo ra `$HOME/.kube` và hướng dẫn để tạo ra file cấu hình
+
+**Bước 1:** Kiểm tra chắc chắn rằng phiên bản bạn cài là mới nhất:
+
+```
+kubectl version
+```
+
+> **Ghi chú:** Cập nhật của bản cài đặt sẽ được thực hiện khi chạy lại các câu lệnh từ bước 1.
+
+### Cài đặt trên Windows sử dụng Chocolatey hoặc Scoop 
+
+**Bước 1:** Để cài đặt kubectl trên Windows bạn có thể sử dụng trình quản lý gói [Chocolatey](https://chocolatey.org/) hoặc bộ cài đặt câu lệnh [Scoop](https://scoop.sh/).
+
+* Nếu bạn dùng Choco
+
+```
 choco install kubernetes-cli
 ```
 
-**Cài đặt với Scoop**
+* Nếu bạn dùng Scoop
 
-```powershell
+```
 scoop install kubectl
 ```
 
+**Bước 2:** Kiểm tra chắc chắn rằng phiên bản bạn cài là mới nhất:
+
+```
+kubectl version
+```
+
+**Bước 3:** Di chuyển tới thư mục home của bạn:
+
+```
+cd %USERPROFILE%
+```
+
+**Bước 4:** Tạo thư mục `.kube`:
+
+```
+mkdir .kube
+```
+
+**Bước 5:** Di chuyển tới thư mục `.kube` bạn vừa mới tạo:
+
+```
+cd .kube
+```
+
+**Bước 6:** Cấu hình kubectl để sử dụng Kubernetes cluster từ xa:
+
+```
+New-Item config -type file
+```
+
+> **Ghi chú:** Chỉnh sửa file cấu hình với trình soạn thảo văn bản, như là Notepad.
+
 ***
 
-### 3. Xác minh Cấu hình kubectl
+## **Tải xuống từ một phần của Google Cloud SDK** 
 
-Kiểm tra kubectl đã được cấu hình đúng bằng cách chạy:
+Bạn có thể cài đặt kubectl từ một phần của Google Cloud SDK.
 
-```bash
+**Bước 1:** Cài đặt [Google Cloud SDK](https://cloud.google.com/sdk/).
+
+**Bước 2:** Thực thi câu lệnh cài đặt `kubectl`:
+
+```
+gcloud components install kubectl
+```
+
+**Bước 3:** Kiểm tra chắc chắn rằng phiên bản bạn cài là mới nhất:
+
+```
+kubectl version
+```
+
+***
+
+## **Xác minh cấu hình kubectl** 
+
+1. Để kubectl tìm kiếm và truy cập Kubernetes cluster, nó cần một kubeconfig file, được tự động tạo ra khi bạn tạo mới một cluster sử dụng [kube-up.sh](https://github.com/kubernetes/kubernetes/blob/master/cluster/kube-up.sh) hoặc triển khai thành công một Minikube cluster. Mặc định thì cấu hình của kubectl được xác định tại `~/.kube/config`.
+2. Kiểm tra kubectl được cấu hình đúng bằng việc xem trạng thái của cluster:\
+   kubectl cluster-info
+
+```
 kubectl cluster-info
 ```
 
-Nếu phản hồi là URL, kubectl đã được cấu hình đúng. Nếu xuất hiện lỗi "The connection to the server [server-name:port](server-name:port) was refused", kiểm tra lại cấu hình cluster.
+3. Nếu bạn trông thấy một URL phản hồi, thì kubectl đã được cấu hình đúng để truy cập vào cluster của bạn.
+4. Nếu bạn trông thấy một tin nhắn tương tự bên dưới, thì kuberctl chưa được cấu hình đúng hoặc chưa thể kết nối với Kubernetes cluster.\
+   `The connection to the server <server-name:port> was refused - did you specify the right host or port?`\
+   Ví dụ như, nếu bạn đang định chạy một Kubernetes cluster trên laptop của bạn (locally), bạn sẽ cần một công cụ như Minikube được cài trước đó và chạy lại các câu lệnh bên trên.\
+   Nếu kubectl cluster-info trả về url nhưng bạn không thể truy cập vào cluster của bạn, thì hãy kiểm tra nó đã được cấu hình đúng hay chưa, bằng cách:
+
+```
+kubectl cluster-info dump
+```
 
 ***
 
-### 4. Kích Hoạt Shell Autocompletion
+## **Các lựa chọn cấu hình kubectl** 
 
-#### Bash trên Linux
+### Kích hoạt shell autocompletion 
 
-Cài đặt bash-completion nếu chưa có:
+* kubectl cung cấp autocompletion hỗ trợ cho Bash and Zsh, giúp bạn giảm thiểu việc phải gõ nhiều câu lệnh.
+* Bên dưới đây là các bước để thiết lập autocompletion cho Bash (bao gồm sự khác nhau giữa Linux và macOS) và Zsh.
 
-```bash
-sudo apt-get install bash-completion
+***
+
+### **Bash trên Linux** 
+
+#### Giới thiệu 
+
+* Kubelet completion script cho Bash được tạo ra với câu lệnh **`kubectl completion bash`**. Sau khi script được tạo ra, bạn cần source (thực thi) script đó để kích hoạt tính năng autocompletion.
+* Tuy nhiên, completion script phụ thuộc vào [**bash-completion**](https://github.com/scop/bash-completion), nên bạn phải cài đặt bash-completion trước đó (kiểm tra bash-completion tồn tại với câu lệnh `type _init_completion`).
+
+#### Cài đặt bash-completion 
+
+1. bash-completion được cung cấp bởi nhiều trình quản lý gói (xem tại [đây](https://github.com/scop/bash-completion#installation)). Bạn có thể cài đặt với lệnh `apt-get install bash-completion` hoặc `yum install bash-completion`.
+2. Các lệnh trên tạo ra `/usr/share/bash-completion/bash_completion`, đây là script chính của bash-completion. Tùy thuộc vào trình quản lý gói của bạn, mà bạn phải source (thực thi) file này trong file `~/.bashrc`.
+3. Để tìm ra file này, reload lại shell hiện tại của bạn và chạy lệnh `type _init_completion`. Nếu thành công, bạn đã thiết lập xong, không thì hãy thêm đoạn sau vào file `~/.bashrc` của bạn:
+
+```
+source /usr/share/bash-completion/bash_completion
 ```
 
-Thêm dòng sau vào `~/.bashrc`:
+4. Reload lại shell của bạn và xác nhận bash-completion được cài đặt đúng bằng lệnh `type _init_completion`.
 
-```bash
+#### Kích hoạt kubectl autocompletion 
+
+Bây giờ bạn cần đảm bảo rằng kubectl completion script được sourced trên tất cả các session của shell. Có 2 cách để làm việc này:
+
+* Source script trong file `~/.bashrc`:
+
+```
 echo 'source <(kubectl completion bash)' >>~/.bashrc
 ```
 
-Tải lại shell:
+* Thêm script vào thư mục `/etc/bash_completion.d`:
 
-```bash
-source ~/.bashrc
+```
+kubectl completion bash >/etc/bash_completion.d/kubectl
 ```
 
-#### Zsh trên macOS/Linux
+*   Nếu bạn có một alias cho kubectl, bạn có thể thêm một shell completion nữa cho alias đó:
 
-Thêm dòng sau vào `~/.zshrc`:
+    ```
+    echo 'alias k=kubectl' >>~/.bashrcecho 'complete -F __start_kubectl k' >>~/.bashrc
+    ```
 
-```bash
-echo 'source <(kubectl completion zsh)' >>~/.zshrc
+> **Ghi chú:** bash-completion sources tất cả completion scripts trong `/etc/bash_completion.d`.
+
+Các cách trên đều hiệu quả tương đương nhau. Sau khi reload lại shell, kubectl autocompletion sẽ làm việc.
+
+***
+
+### **Bash trên macOS** 
+
+#### Giới thiệu 
+
+Kubectl completion script trên Bash được tạo ra bởi `kubectl completion bash`. Source script này sẽ kích hoạt tính năng kubectl completion.
+
+Tuy nhiên, kubectl completion script phụ thuộc vào [**bash-completion**](https://github.com/scop/bash-completion) mà bạn cài trước đó.
+
+> **Cảnh báo:** Có 2 phiên bản của bash-completion là v1 và v2. V1 dành cho Bash 3.2 (Bash mặc định trên macOS), và v2 dành cho Bash 4.1+. Kubectl completion script **không làm việc** phù hợp với bash-completion v1 và Bash 3.2. Nó tương thích với **bash-completion v2** và **Bash 4.1+**. Vì vậy, để sử dụng kubectl completion một cách chính xác trên macOS thì bạn phải cài đặt Bash 4.1+ ([_hướng dẫn_](https://itnext.io/upgrading-bash-on-macos-7138bd1066ba)). Hướng dẫn tiếp theo giả định rằng bạn đang sử dụng Bash 4.1+ (nghĩa là, bất kỳ phiên bản Bash nào từ 4.1 trở lên).
+
+#### Cài đặt bash-completion 
+
+> **Ghi chú:** Như đã đề cập, những hướng dẫn này giả định bạn đang sử dụng Bash 4.1+, có nghĩa rằng bạn sẽ cài đặt bash-completion v2 (trái ngược với Bash 3.2 và bash-completion v1, trong trường hợp đó, kubectl completion sẽ không hoạt động).
+
+1. Bạn có thể kiểm tra bash-completion v2 đã cài đặt trước đó chưa với lệnh **`type _init_completion`**. Nếu chưa, bạn có thể cài đặt nó với Homebrew:
+
+```
+brew install bash-completion@2
 ```
 
-Tải lại shell:
+2. Từ đầu ra của lệnh này, hãy thêm đoạn sau vào file **`~/.bashrc`** của bạn:\
+   export BASH\_COMPLETION\_COMPAT\_DIR="/usr/local/etc/bash\_completion.d"
 
-```bash
-source ~/.zshrc
 ```
+export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+```
+
+Tải lại shell của bạn và xác minh rằng bash-completion v2 được cài đặt chính xác chưa bằng lệnh **`type _init_completion`**.
+
+#### Kích hoạt kubectl autocompletion 
+
+Bây giờ bạn phải đảm bảo rằng kubectl completion script đã được sourced trong tất cả các phiên shell của bạn. Có nhiều cách để đạt được điều này:
+
+* Source completion script trong file `~/.bashrc`:
+
+```
+echo 'source <(kubectl completion bash)' >>~/.bashrc
+```
+
+* Thêm completion script vào thư mục `/usr/local/etc/bash_completion.d`:
+
+```
+kubectl completion bash >/usr/local/etc/bash_completion.d/kubectl
+```
+
+*   Nếu bạn có alias cho kubectl, bạn có thể mở rộng shell completion để làm việc với alias đó:
+
+    ```
+    echo 'alias k=kubectl' >>~/.bashrcecho 'complete -F __start_kubectl k' >>~/.bashrc
+    ```
+* Nếu bạn đã cài kubectl với Homebrew (như đã giới thiệu [bên trên](https://kubernetes.io/vi/docs/tasks/tools/#install-with-homebrew-on-macos))) thì kubectl completion script sẽ có trong **`/usr/local/etc/bash_completion.d/kubectl`**. Trong trường hợp này thì bạn không cần làm gì cả.
+
+> **Ghi chú:** Cài đặt theo cách Homebrew đã source tất cả các tệp trong thư mục `BASH_COMPLETION_COMPAT_DIR`, đó là lý do tại sao hai phương thức sau hoạt động.
+
+Trong mọi trường hợp, sau khi tải lại shell của bạn, kubectl completion sẽ hoạt động.
+
+***
+
+### **Zsh** 
+
+1. Kubectl completion script cho Zsh được tạo ra với lệnh `kubectl completion zsh`. Source completion script trong shell của bạn sẽ kích hoạt kubectl autocompletion.\
+   Để nó hoạt động cho tất cả các shell, thêm dòng sau vào file `~/.zshrc`:
+
+```
+source <(kubectl completion zsh)
+```
+
+2. Nếu bạn có alias cho kubectl, bạn có thể mở rộng shell completion để làm việc với alias đó:
+
+```
+echo 'alias k=kubectl' >>~/.zshrcecho 'complete -F __start_kubectl k' >>~/.zshrc
+```
+
+Sau khi tải lại shell, kubectl autocompletion sẽ hoạt động.
+
+3. Nếu bạn nhận được lỗi complete:13: command not found: compdef, thêm dòng sau vào đầu file `~/.zshrc`:
+
+```
+autoload -Uz compinitcompinit
+```
+
+_Chi tiết tham khảo thêm tại_ [kubernetes.io](http://kubernetes.io/)

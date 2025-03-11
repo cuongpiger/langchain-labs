@@ -8,7 +8,7 @@ Bản thân Terraform không có giao diện người dùng đồ họa, thay v�
 
 ***
 
-### Các bước thực hiện <a href="#quanlyvcontainervoiterraform-dequanlyvcontainervoiterraform-bancanlamcacbuocsauday" id="quanlyvcontainervoiterraform-dequanlyvcontainervoiterraform-bancanlamcacbuocsauday"></a>
+### Các bước thực hiện 
 
 Để khởi tạo một Cluster Kubernetes bằng Terraform, bạn cần thực hiện các bước sau:
 
@@ -73,22 +73,20 @@ resource "vngcloud_vks_cluster" "primary" {
 }
 ```
 
-{% hint style="info" %}
-**Chú ý:**
-
-* Chúng tôi khuyên bạn nên tạo và quản lý các Cluster, Node Group dưới dạng resource riêng biệt, như trong ví dụ bên dưới. Điều này cho phép bạn thêm hoặc xóa các Node Group mà không cần tạo lại toàn bộ Cluster. Nếu bạn khai báo trực tiếp Node Group Default trong tài nguyên vngcloud\_vks\_cluster, bạn không thể xóa chúng mà không tạo lại chính Cluster đó.
-*   Trong file main.tf, để khởi tạo một cluster với một node group thành công, bạn bắt buộc cần nhập thông tin của 4 field sau:
-
-    ```
-      vpc_id    = "net-xxxxxxxx-xxxx-xxxxx-xxxx-xxxxxxxxxxxx"
-      subnet_id = "sub-xxxxxxxx-xxxx-xxxxx-xxxx-xxxxxxxxxxxx"
-      ssh_key_id= "ssh-xxxxxxxx-xxxx-xxxxx-xxxx-xxxxxxxxxxxx"
-    ```
-{% endhint %}
+> **Chú ý:**
+>
+> * Chúng tôi khuyên bạn nên tạo và quản lý các Cluster, Node Group dưới dạng resource riêng biệt, như trong ví dụ bên dưới. Điều này cho phép bạn thêm hoặc xóa các Node Group mà không cần tạo lại toàn bộ Cluster. Nếu bạn khai báo trực tiếp Node Group Default trong tài nguyên vngcloud\_vks\_cluster, bạn không thể xóa chúng mà không tạo lại chính Cluster đó.
+> *   Trong file main.tf, để khởi tạo một cluster với một node group thành công, bạn bắt buộc cần nhập thông tin của 4 field sau:
+>
+>     ```
+>       vpc_id    = "net-xxxxxxxx-xxxx-xxxxx-xxxx-xxxxxxxxxxxx"
+>       subnet_id = "sub-xxxxxxxx-xxxx-xxxxx-xxxx-xxxxxxxxxxxx"
+>       ssh_key_id= "ssh-xxxxxxxx-xxxx-xxxxx-xxxx-xxxxxxxxxxxx"
+>     ```
 
 ***
 
-### <mark style="color:blue;">Các ví dụ tham khảo</mark>
+### **Các ví dụ tham khảo**
 
 #### Example Usage 1 - Create a Cluster with Network type CALICO OVERLAY and a Node Group with AutoScale Mode
 
@@ -259,14 +257,12 @@ resource "vngcloud_vks_cluster_node_group" "primary" {
 }
 ```
 
-{% hint style="info" %}
-**Chú ý:**
+> **Chú ý:**
+>
+> * Để lấy image\_id bạn mong muốn sử dụng, bạn có thể truy cập vào VKS Portal, chọn menu System Image và lấy ID mà bạn mong muốn hoặc lấy thông tin này tại [đây](tham-khao-them/danh-sach-system-image-dang-ho-tro.md).
+> * Để lấy flavor\_id bạn mong muốn sử dụng cho Node group của bạn, vui lòng lấy ID tại [đây](tham-khao-them/danh-sach-flavor-dang-ho-tro.md).
 
-* Để lấy image\_id bạn mong muốn sử dụng, bạn có thể truy cập vào VKS Portal, chọn menu System Image và lấy ID mà bạn mong muốn hoặc lấy thông tin này tại [đây](tham-khao-them/danh-sach-system-image-dang-ho-tro.md).
-* Để lấy flavor\_id bạn mong muốn sử dụng cho Node group của bạn, vui lòng lấy ID tại [đây](tham-khao-them/danh-sach-flavor-dang-ho-tro.md).
-{% endhint %}
-
-### **Khởi chạy Terraform command** <a href="#quanlyvcontainervoiterraform-khoichayterraformcommand" id="quanlyvcontainervoiterraform-khoichayterraformcommand"></a>
+### **Khởi chạy Terraform command** 
 
 * Sau khi hoàn tất các thông tin trên, thực hiện chạy lệnh bên dưới:
 
@@ -290,39 +286,39 @@ terraform apply
 
 ***
 
-### **Kiểm tra Cluster vừa tạo trên giao diện VNG Cloud Portal** <a href="#quanlyvcontainervoiterraform-kiemtracontainervuataotrengiaodienvngcloudportal" id="quanlyvcontainervoiterraform-kiemtracontainervuataotrengiaodienvngcloudportal"></a>
+### **Kiểm tra Cluster vừa tạo trên giao diện VNG Cloud Portal** 
 
 Sau khi khởi tạo thành công Terraform, bạn có thể lên VKS Portal để xem thông tin Cluster vừa tạo.
 
-Tham khảo thêm về cách sử dụng Terraform để làm việc với VKS tại [đây](https://registry.terraform.io/providers/vngcloud/vngcloud/latest/docs/resources/vks_cluster).
+Tham khảo thêm về cách sử dụng Terraform để làm việc với VKS tại [đây](https://registry.terraform.io/providers/vngcloud/vngcloud/latest/docs/resources/vks\_cluster).
 
 ### **Một số lưu ý khi sử dụng VKS với Terraform:**
 
 Khi sử dụng **Terraform** để khởi tạo **Cluster** và **Node Group** trên hệ thống VKS, nếu bạn thay đổi một trong các field sau, hệ thống sẽ tự động xóa Node Group/ Cluster và thực hiện khởi tạo lại Node Group/ Cluster theo thông số mới tương ứng. Việc xóa sẽ được thực hiện trước khi tạo Node Group/ Cluster mới.
 
 * Đỗi với resource `vngcloud_vks_cluster`, các field khi bạn thay đổi hệ thống sẽ xóa Cluster và tạo lại bao gồm:
-  * `name`&#x20;
-  * `description`&#x20;
-  * `enable_private_cluster`&#x20;
-  * `network_type`&#x20;
-  * `vpc_id`&#x20;
-  * `subnet_id`&#x20;
-  * `cidr`&#x20;
-  * `enabled_load_balancer_plugin`&#x20;
-  * `enabled_block_store_csi_plugin`&#x20;
-  * `node_group`&#x20;
-  * `secondary_subnets`&#x20;
+  * `name` 
+  * `description` 
+  * `enable_private_cluster` 
+  * `network_type` 
+  * `vpc_id` 
+  * `subnet_id` 
+  * `cidr` 
+  * `enabled_load_balancer_plugin` 
+  * `enabled_block_store_csi_plugin` 
+  * `node_group` 
+  * `secondary_subnets` 
   * `node_netmask_size`
 * Đỗi với resource `vngcloud_vks_cluster_node_group`, các field khi bạn thay đổi hệ thống sẽ xóa Cluster và tạo lại bao gồm:
-  * `cluster_id`&#x20;
-  * `name`&#x20;
-  * `flavor_id`&#x20;
-  * `disk_size`&#x20;
-  * `disk_type`&#x20;
-  * `enable_private_nodes`&#x20;
-  * `ssh_key_id`&#x20;
-  * `secondary_subnets`&#x20;
-  * `enabled_encryption_volume`&#x20;
+  * `cluster_id` 
+  * `name` 
+  * `flavor_id` 
+  * `disk_size` 
+  * `disk_type` 
+  * `enable_private_nodes` 
+  * `ssh_key_id` 
+  * `secondary_subnets` 
+  * `enabled_encryption_volume` 
   * `subnet_id`
 
 Để chỉ định hệ thống tạo cluster/node group mới rồi mới thực hiện xóa cluster/ node group cũ, bạn có thể thêm tham số `lifecycle { create_before_destroy = true }`vào file main.tf của bạn. Cụ thể:
