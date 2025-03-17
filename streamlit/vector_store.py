@@ -52,7 +52,7 @@ def create_vector_db(texts, embeddings=None, collection_name="chroma"):
     # this will be a chroma collection with a default name.
     db = PGVector(
         embeddings=proxy_embeddings,
-        collection_name=collection_name,
+        collection_name=COLLECTION_NAME,
         connection=envs["POSTGRESQL_URI_2"],
         use_jsonb=True,
     )

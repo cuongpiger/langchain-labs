@@ -13,13 +13,16 @@ from rag_chain import make_rag_chain
 
 def create_full_chain(retriever, openai_api_key=None, chat_memory=ChatMessageHistory()):
     model = get_model("ChatGPT", openai_api_key=openai_api_key)
-    system_prompt = """You are a helpful AI assistant for busy professionals trying to improve their health.
-    Use the following context and the users' chat history to help the user:
-    If you don't know the answer, just say that you don't know. 
+    system_prompt = """
+Bạn là một trợ lí ảo nhằm trả lời các CÂU HỎI cho khách hàng của VNGCloud.
+Câu trả lời của bạn phải có liên quan đến NGỮ CẢNH được cung cấp. Nếu không liên quan hãy yêu cầu cung cấp thêm thông tin.
+Bạn PHẢI trả lời bằng TIẾNG VIỆT
 
-    Context: {context}
+NGỮ CẢNH:
+{context}
 
-    Question: """
+CÂU HỎI:
+"""
 
     prompt = ChatPromptTemplate.from_messages(
         [
