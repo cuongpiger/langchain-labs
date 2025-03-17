@@ -1,5 +1,6 @@
 import os
 from typing import List, Iterable, Any
+import re
 
 from dotenv import load_dotenv
 from langchain.memory import ChatMessageHistory
@@ -14,12 +15,13 @@ from langchain_core.runnables.history import RunnableWithMessageHistory
 from basic_chain import get_model
 from rag_chain import make_rag_chain
 
+def remove_thinking(response):
+    response.content = re.sub(r".*</think>\s*", "", response.content, flags=re.DOTALL)
+    return response
+
 
 def create_memory_chain(llm, base_chain, chat_memory):
-    contextualize_q_system_prompt = """Given a chat history and the latest user question \
-        which might reference context in the chat history, formulate a standalone question \
-        which can be understood without the chat history. Do NOT answer the question, \
-        just reformulate it if needed and otherwise return it as is."""
+    contextualize_q_system_prompt = """Cung cấp ĐOẠN HỘI THOẠI và CÂU HỎI, đánh giá CÂU HỎI có liên quan đến ĐOẠN HỘI THOẠI hay không. Nếu có vui lòng diễn giải lại, ngược lại GIỮ NGUYÊN CÂU HỎI."""
 
     contextualize_q_prompt = ChatPromptTemplate.from_messages(
         [
@@ -29,7 +31,7 @@ def create_memory_chain(llm, base_chain, chat_memory):
         ]
     )
 
-    runnable = contextualize_q_prompt | llm | base_chain
+    runnable = contextualize_q_prompt | llm | remove_thinking | base_chain
 
     def get_session_history(session_id: str) -> BaseChatMessageHistory:
         return chat_memory
@@ -40,6 +42,7 @@ def create_memory_chain(llm, base_chain, chat_memory):
         input_messages_key="question",
         history_messages_key="chat_history",
     )
+
     return with_message_history
 
 

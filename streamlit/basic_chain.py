@@ -22,32 +22,15 @@ envs = utils.load_env_to_dict(ENV_FILE_PATH)
 
 
 def get_model(repo_id=ZEPHYR_ID, **kwargs):
-    if repo_id == "ChatGPT":
-        chat_model = ChatOpenAI(
-            openai_api_key="EMPTY",
-            openai_api_base=envs['VLLM_HOST_URL_2'] + "/v1/",
-            model_name=MODEL_NAME,
-            max_tokens=MAX_TOKENS,
-            streaming=True,
-            temperature=0,
-        )
-    else:
-        huggingfacehub_api_token = kwargs.get("HUGGINGFACEHUB_API_TOKEN", None)
-        if not huggingfacehub_api_token:
-            huggingfacehub_api_token = os.environ.get("HUGGINGFACEHUB_API_TOKEN", None)
-        os.environ["HF_TOKEN"] = huggingfacehub_api_token
+    chat_model = ChatOpenAI(
+        openai_api_key="EMPTY",
+        openai_api_base=envs['VLLM_HOST_URL_2'] + "/v1/",
+        model_name=MODEL_NAME,
+        max_tokens=MAX_TOKENS,
+        streaming=True,
+        temperature=0,
+    )
 
-        llm = HuggingFaceHub(
-            repo_id=repo_id,
-            task="text-generation",
-            model_kwargs={
-                "max_new_tokens": 512,
-                "top_k": 30,
-                "temperature": 0.1,
-                "repetition_penalty": 1.03,
-                "huggingfacehub_api_token": huggingfacehub_api_token,
-            })
-        chat_model = ChatHuggingFace(llm=llm)
     return chat_model
 
 

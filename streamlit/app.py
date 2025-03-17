@@ -4,7 +4,8 @@ from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 
 from ensemble import ensemble_retriever_from_docs
 from full_chain import create_full_chain, ask_question
-from local_loader import load_txt_files
+from langchain.retrievers import EnsembleRetriever
+
 
 st.set_page_config(page_title="LangChain & Streamlit RAG")
 st.title("LangChain & Streamlit RAG")
@@ -28,26 +29,39 @@ def show_ui(qa, prompt_to_user="How may I help you?"):
     # Generate a new response if last message is not from assistant
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
+            content = ""
             with st.spinner("Thinking..."):
-                response = ask_question(qa, prompt)
-                st.markdown(response.content)
-        message = {"role": "assistant", "content": response.content}
+                content = ""
+                placeholder = st.empty()
+                for msg in qa.stream(
+                    {"question": prompt},
+                    config={"configurable": {"session_id": "foo"}}
+                ):
+                    if content == "":
+                        content += "💭 THINKING...\n\n\n"
+
+                    if msg.content.strip() == "</think>":
+                        content += "\n\n\n💬 ANSWERING...\n"
+                        continue
+
+                    content += msg.content
+                    placeholder.markdown(content)
+        message = {"role": "assistant", "content": content}
         st.session_state.messages.append(message)
 
 
 @st.cache_resource
-def get_retriever(openai_api_key=None):
-    docs = load_txt_files()
-    embeddings = HuggingFaceEmbeddings(
+def get_retriever() -> EnsembleRetriever:
+    embeddings: HuggingFaceEmbeddings = HuggingFaceEmbeddings(
         model_name="sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
     )
-    return ensemble_retriever_from_docs(docs, embeddings=embeddings)
+
+    return ensemble_retriever_from_docs(embeddings=embeddings)
 
 
 def get_chain(openai_api_key=None, huggingfacehub_api_token=None):
-    ensemble_retriever = get_retriever(openai_api_key=openai_api_key)
+    ensemble_retriever = get_retriever()
     chain = create_full_chain(ensemble_retriever,
-                              openai_api_key=openai_api_key,
                               chat_memory=StreamlitChatMessageHistory(key="langchain_messages"))
     return chain
 

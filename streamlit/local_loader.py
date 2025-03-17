@@ -13,16 +13,6 @@ def list_txt_files(data_dir="./data"):
         yield str(path)
 
 
-def load_txt_files(data_dir="./data"):
-    docs = []
-    paths = list_txt_files(data_dir)
-    for path in paths:
-        print(f"Loading {path}")
-        loader = TextLoader(path)
-        docs.extend(loader.load())
-    return docs
-
-
 def load_csv_files(data_dir="./data"):
     docs = []
     paths = Path(data_dir).glob('**/*.csv')

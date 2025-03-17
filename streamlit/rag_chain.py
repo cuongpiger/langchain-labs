@@ -18,7 +18,11 @@ def find_similar(vs, query):
 
 
 def format_docs(docs):
-    return "\n\n".join(doc.page_content for doc in docs)
+    context = ""
+    for doc_th, document in enumerate(docs):
+        context = context + f"- Document {doc_th + 1}:\n{document.page_content}\n\n"
+
+    return context
 
 
 def get_question(input):
@@ -43,7 +47,7 @@ def make_rag_chain(model, retriever, rag_prompt = None):
     rag_chain = (
             {
                 "context": RunnableLambda(get_question) | retriever | format_docs,
-                "question": RunnablePassthrough()
+                "question": RunnablePassthrough(),
             }
             | rag_prompt
             | model
