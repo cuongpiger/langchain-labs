@@ -8,7 +8,7 @@ from langchain.retrievers import EnsembleRetriever
 
 
 st.set_page_config(page_title="LangChain & Streamlit RAG")
-st.title("LangChain & Streamlit RAG")
+st.title("Dịch vụ hỗ trợ khách hàng tự động được cung cấp bởi VNGCloud")
 
 
 def show_ui(qa, prompt_to_user="How may I help you?"):
@@ -85,8 +85,8 @@ def run():
 
     if ready:
         chain = get_chain(openai_api_key="", huggingfacehub_api_token="")
-        st.subheader("Ask me questions about this week's meal plan")
-        show_ui(chain, "What would you like to know?")
+        st.subheader("Dịch vụ hỗ trợ khách hàng tự động được cung cấp bởi VNGCloud")
+        show_ui(chain, "Xin chào, mình là Orin. Mình là trợ lí ảo nhằm giải đáp các thắc mắc của khách hàng về các dịch vụ của VNGCloud. Bạn có câu hỏi gì không?")
     else:
         st.stop()
 
