@@ -26,7 +26,7 @@ CÂU HỎI:
     prompt = ChatPromptTemplate.from_messages(
         [
             ("system", system_prompt),
-            ("system", "Entire image URLs MUST display the following format: ![Description](IMAGE_URL)")
+            ("system", "Entire image URLs MUST display the following format: ![Description](IMAGE_URL)"),
             ("human", "{question}"),
         ]
     )
