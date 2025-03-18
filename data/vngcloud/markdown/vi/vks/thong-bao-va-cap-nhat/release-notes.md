@@ -197,7 +197,7 @@ VKS (VNGCloud Kubernetes Service) giới thiệu bản cập nhật mới nhất
 
 **Cải tiến:**
 
-* **Nâng cấp Plugin VNGCloud LoadBalancer Controller:** Bổ sung Annotation để cấu hình Load Balancer hỗ trợ Proxy Protocol. Chi tiết tham khảo thêm tại [đây](https://docs.vngcloud.vn/vng-cloud-document/vks/bat-dau-voi-vks/preserve-source-ip-when-using-nlb-and-nginx-ingress-controller).
+* **Nâng cấp Plugin VNGCloud LoadBalancer Controller:** Bổ sung Annotation để cấu hình Load Balancer hỗ trợ Proxy Protocol. Chi tiết tham khảo thêm tại [đây](https://docs.vngcloud.vn/vng-cloud-document/vn/vks/bat-dau-voi-vks/preserve-source-ip-khi-su-dung-vlb-layer4-va-nginx-ingress-controller).
 
 ***
 

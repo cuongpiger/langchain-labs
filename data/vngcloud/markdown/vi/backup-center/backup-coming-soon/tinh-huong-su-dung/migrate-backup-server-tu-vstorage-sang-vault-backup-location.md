@@ -33,7 +33,7 @@ Tiếp theo, bạn cần truy cập vào trang backup server để chọn các b
 
 * **Truy cập trang backup server** tại đây: [https://backupcenter.console.vngcloud.vn/backup-server/list](https://backupcenter.console.vngcloud.vn/backup-server/list)
 * **Tìm và chọn backup server lưu tại vStorage project:**
-  * Đầu tiên, bạn cần **xác định tên của vị trí lưu trữ cũ** bằng cách truy cập vào backup location, xác định tên của backup location có **type = vStorage** như hình dưới đây ![](<../../../.gitbook/assets/image (773).png>)
+  * Đầu tiên, bạn cần **xác định tên của vị trí lưu trữ cũ** bằng cách truy cập vào backup location, xác định tên của backup location có **type = vStorage** như hình dưới đây ![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(773).png?raw=true)
   *   Tiếp theo, truy cập trang **backup serve**r, chọn các backup server có nơi lưu trữ là **vBackup-Project-5fa985c8** (lưu ý rằng, tên này sẽ thay đổi tùy vào từng người dùng). 
 
       ![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(774).png?raw=true)

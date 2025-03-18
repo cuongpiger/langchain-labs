@@ -32,7 +32,7 @@ Tham khảo hướng dẫn chi tiết bên dưới để thực hiện chuyển 
 **Bước 0: Cấu hình các thông tin cần chuyển đổi:**
 
 * 0.1: Truy cập danh sách volume từ portal [tại đây.](https://hcm-3.console.vngcloud.vn/vserver/block-store/volumes)
-* 0.2: Điều hướng tới volume cần chuyển đổi, nhấn chọn **biểu tượng ba chấm** tại cột **Hành động** ![](<../../../.gitbook/assets/image (286).png>)
+* 0.2: Điều hướng tới volume cần chuyển đổi, nhấn chọn **biểu tượng ba chấm** tại cột **Hành động** ![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(286).png?raw=true)
 * 0.3: Tiếp tục nhấn chọn **Migrate Volume**
 * 0.4: Tại của sổ chọn thông tin để Migrate, chọn các thông tin sau:
   * Loại: mặc định chọn NVME
@@ -80,7 +80,7 @@ Tham khảo hướng dẫn chi tiết bên dưới để thực hiện chuyển 
 **Bước 0: Cấu hình các thông tin cần chuyển đổi:**
 
 * 0.1: Truy cập danh sách volume từ portal [tại đây.](https://hcm-3.console.vngcloud.vn/vserver/block-store/volumes)
-* 0.2: Điều hướng tới volume cần chuyển đổi, nhấn chọn **biểu tượng ba chấm** tại cột **Hành động** ![](<../../../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png>)
+* 0.2: Điều hướng tới volume cần chuyển đổi, nhấn chọn **biểu tượng ba chấm** tại cột **Hành động** ![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(5)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1)%20(1).png?raw=true)
 * 0.3: Tiếp tục nhấn chọn **Migrate Volume** 
 * 0.4: Tại của sổ chọn thông tin để Migrate, chọn các thông tin sau:
   * Loại: mặc định chọn NVME

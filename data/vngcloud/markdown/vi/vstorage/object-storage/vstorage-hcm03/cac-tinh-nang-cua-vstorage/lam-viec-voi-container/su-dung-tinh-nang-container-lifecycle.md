@@ -110,13 +110,13 @@ _**Tham khảo 2 ví dụ bên dưới để hiểu cơ chế hoạt động c�
 
 _**Ví dụ 1:** bạn đã tạo container01 (container01 chưa được bạn bật tính năng container versioning). Lúc này bạn có nhu cầu thiết lập 1 rule theo quy tắc: nếu 60 ngày mà các object không được truy cập thì hệ thống thực hiện xóa. Lúc này bạn sẽ thiết lập quy tắc expiration như sau:_ 
 
-![](<../../../../../.gitbook/assets/image (396).png>)
+![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(396).png?raw=true)
 
 _Trong vòng 2h kể từ khi lifecycle rule này được tạo, hệ thống vStorage sẽ thực hiện chạy rule, kiểm tra các object trong container01 và xóa các object thỏa mãn điều kiện 60 ngày không được truy cập._ 
 
 _**Ví dụ 2:** bạn đã tạo container01 (container01 đã được bạn bật tính năng container versioning). Lúc này bạn có nhu cầu thiết lập 1 rule theo quy tắc: nếu 60 ngày mà các object không được truy cập thì hệ thống thực hiện xóa. Lúc này bạn sẽ thiết lập quy tắc expiration như sau:_ 
 
-![](<../../../../../.gitbook/assets/image (397).png>)
+![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(397).png?raw=true)
 
 _Trong vòng 2h kể từ khi lifecycle rule này được tạo, hệ thống vStorage sẽ thực hiện chạy rule, kiểm tra các object trong container01, container01\_version và thực hiện:_
 

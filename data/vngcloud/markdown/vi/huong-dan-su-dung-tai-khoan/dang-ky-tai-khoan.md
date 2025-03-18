@@ -40,13 +40,13 @@ Màn hình tương tự như sau:
 
 ![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(183).png?raw=true)
 
-Nhấp chọn vào ![](<../.gitbook/assets/image (184).png>) để nhận OTP đăng ký.
+Nhấp chọn vào ![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(184).png?raw=true) để nhận OTP đăng ký.
 
 * Nếu người dùng nhập số điện thoại, và mã quốc gia là Việt Nam (+84), OTP được gửi vào số điện  thoại qua SMS
 * Nếu người dùng nhập vào số điện thoại và mã quốc gia không phải là Việt Nam. OTP sẽ được gửi vào email đăng ký.
 * Nếu người dùng không nhập số điện thoại, OTP được gửi vào email đăng ký
 
-Người dùng nhập thông tin đăng ký, OTP vào bảng trên & nhấp chọn ![](<../.gitbook/assets/image (185).png>). Khi thông tin nhập liệu đã hợp lệ. Người dùng nhận được thông báo & email xác nhận đăng ký thành công.
+Người dùng nhập thông tin đăng ký, OTP vào bảng trên & nhấp chọn ![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(185).png?raw=true). Khi thông tin nhập liệu đã hợp lệ. Người dùng nhận được thông báo & email xác nhận đăng ký thành công.
 
 Các thông tin về email và số điện thoại của khách hàng được VNG Cloud mã hóa theo thuật toán Symmetric AES nhằm đảm bảo an toàn thông tin khách hàng
 

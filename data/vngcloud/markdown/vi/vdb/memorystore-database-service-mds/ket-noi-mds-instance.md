@@ -8,7 +8,7 @@ Nếu muốn truy cập bằng giao diện, bạn có thể tham khảo tool Ano
 
 sau đó thực hiện theo video hướng dẫn (bắt đầu ở 1:00):
 
-{% embed url="https://youtu.be/1kvJi3Hg4wM" %}
+[Video](https://youtu.be/1kvJi3Hg4wM)
 
 Nếu sử dụng tool cli, bạn có thể làm theo bài viết sau sử dụng **redis-cli**.
 

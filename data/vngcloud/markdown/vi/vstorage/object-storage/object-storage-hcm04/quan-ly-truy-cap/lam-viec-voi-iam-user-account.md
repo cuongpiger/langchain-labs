@@ -71,7 +71,7 @@ Sau khi bạn đã khởi tạo IAM User Account và Policy mong muốn, tiếp 
 Để phân quyền truy cập vào bucket/ object cho IAM User Account, bạn cần thực hiện phân quyền qua tính băng Bucket Policy, cụ thể các bước thực hiện như sau:
 
 1. Đăng nhập vào [https://vstorage.console.vngcloud.vn](https://vstorage.console.vngcloud.vn/storage/list).
-2. Chọn biểu tượng ![](<../../../../.gitbook/assets/image (7) (1) (1).png>)tại project chứa bucket bạn muốn phân quyền.
+2. Chọn biểu tượng ![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(7)%20(1)%20(1).png?raw=true)tại project chứa bucket bạn muốn phân quyền.
 3. Tại mục **Identity and Access Management**, thực hiện sao chép thông tin **vStorage User ID** tại mục **List of IAM User Account**. 
 
 ![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(8)%20(1)%20(1).png?raw=true)

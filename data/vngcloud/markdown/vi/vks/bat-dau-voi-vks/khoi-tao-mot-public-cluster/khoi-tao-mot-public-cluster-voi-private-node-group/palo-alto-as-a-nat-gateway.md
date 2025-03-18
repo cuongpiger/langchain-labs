@@ -48,7 +48,7 @@ Sử dụng hướng dẫn bên dưới dể làm việc với Private Node grou
 
 Lưu ý: Về phần Network của vServer Windows để truy cập vào GUI của Palo Alto. Bạn cần tạo cùng VPC và sử dụng subnet khác với subnet có priority là 1 khi khởi tạo Palo Alto
 
-![](<../../../../.gitbook/assets/3 (1) (1).png>)
+![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/3%20(1)%20(1).png?raw=true)
 
 **Bước 3**: Sau khi đăng nhập xong, bạn cần thực hiện thay đổi mật khẩu lần đầu. Hãy nhập mật khẩu mới theo mong muốn của bạn.
 
@@ -56,15 +56,15 @@ Lưu ý: Về phần Network của vServer Windows để truy cập vào GUI c�
 
 * Chọn bút **Add**
 
-![](<../../../../.gitbook/assets/4 (1).png>)
+![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/4%20(1).png?raw=true)
 
 * Đặt tên cho **Zone**: **Inside** sau đó chọn **OK**
 
-![](<../../../../.gitbook/assets/5 (1).png>)
+![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/5%20(1).png?raw=true)
 
 * Làm tương tự đối với **Zone Outside**
 
-![](<../../../../.gitbook/assets/6 (1).png>)
+![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/6%20(1).png?raw=true)
 
 **Bước 5**: Cấu hình cho **External Interface**
 
@@ -72,7 +72,7 @@ Lưu ý: Về phần Network của vServer Windows để truy cập vào GUI c�
 * Virtual Router: **default**
 * Security Zone: **Outside**
 
-![](<../../../../.gitbook/assets/7 (1).png>)
+![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/7%20(1).png?raw=true)
 
 * Chuyển sang **Tab IPv4** và chọn **Add** để nhập **Static IP** cho **External Interface**
 

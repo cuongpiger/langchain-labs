@@ -17,7 +17,7 @@
 
 **Bước 3:** Lưu thông tin tài khoản
 
-* Nhấn chọn vào biểu tượng   để kết thúc quá trình cập nhật thông tin ![](<../.gitbook/assets/image (189).png>)
+* Nhấn chọn vào biểu tượng   để kết thúc quá trình cập nhật thông tin ![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(189).png?raw=true)
 * Nhấn chọn "**Tôi đã hiểu và muốn tiếp tục**". Bạn sẽ nhận được thông báo cập nhật tài khoản thành công tương tự như hình
 
 ***

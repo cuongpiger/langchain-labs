@@ -37,4 +37,4 @@ Sử dụng Kubernetes cluster giúp đơn giản hóa việc triển khai và q
 
 _**Xem hướng dẫn khởi tạo Kubernetes Cluster nhanh chóng với vServer tại đây:**_
 
-{% embed url="https://youtu.be/pbd25lc1H00" %}
+[Video](https://youtu.be/pbd25lc1H00)

@@ -6,7 +6,7 @@ vServer là dịch vụ cung cấp máy chủ ảo được cung cấp bởi VNG
 
 _**Xem hướng dẫn khởi tạo máy chủ nhanh chống với vServer tại đây:**_
 
-{% embed url="https://www.youtube.com/watch?v=5T3Ryuj4qQg" %}
+[Video](https://www.youtube.com/watch?v=5T3Ryuj4qQg)
 
 ### VNG Cloud cung cấp các Region:
 

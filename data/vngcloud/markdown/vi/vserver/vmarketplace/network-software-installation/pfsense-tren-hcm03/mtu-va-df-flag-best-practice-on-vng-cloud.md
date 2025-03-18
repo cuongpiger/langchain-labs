@@ -43,7 +43,7 @@ Vì thế VNG Cloud khuyến khích khách hàng chủ động giảm giá trị
     ```
 
     \
-    ![](<../../../../.gitbook/assets/image (687).png>)\
+    ![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(687).png?raw=true)\
 
 
     **Ubuntu/Linux**

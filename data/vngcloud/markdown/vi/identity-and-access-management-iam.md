@@ -2,9 +2,7 @@
 
 ##
 
-{% embed url="https://youtu.be/BvrxB9ZK2T0?si=318ook64-hYEhPCi" %}
-Hướng dẫn phân quyền IAM và tích hợp S3 Browser cho vStorage
-{% endembed %}
+[Hướng dẫn phân quyền IAM và tích hợp S3 Browser cho vStorage](https://youtu.be/BvrxB9ZK2T0?si=318ook64-hYEhPCi)
 
 #### **1. IAM là gì?** 
 

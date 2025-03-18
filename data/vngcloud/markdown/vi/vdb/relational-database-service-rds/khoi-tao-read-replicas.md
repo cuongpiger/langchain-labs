@@ -4,7 +4,7 @@ Nhằm mở rộng khả năng read scale cho vDB, bạn có thể tạo read re
 
 Bạn tham khảo videos sau:
 
-{% embed url="https://youtu.be/xGVEQvChdJo" %}
+[Video](https://youtu.be/xGVEQvChdJo)
 
 chi tiết các bước làm như sau:
 

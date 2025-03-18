@@ -17,11 +17,11 @@ Việc cấu hình thông báo email sẽ giúp bạn chủ động hơn trong v
 
       ![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(7).png?raw=true)
 * **Bước 3: Cấu hình địa chỉ email nhận thông báo:**
-  * Tại trang **'Trung tâm thông báo',** nhấn chọn **'Quản lý người nhận':** ![](<../../../.gitbook/assets/image (1) (1) (1) (1) (1).png>)
+  * Tại trang **'Trung tâm thông báo',** nhấn chọn **'Quản lý người nhận':** ![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(1)%20(1)%20(1)%20(1)%20(1).png?raw=true)
     *   "**Xóa người nhận":** Từ danh sách, xóa người nhận không mong muốn bằng cách nhấn nút "Xóa" 
 
         ![Image](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(2)%20(1).png?raw=true)
-    * "**Thêm người nhận**": Nhấn nút 'Thêm người nhận" để thêm người nhận vào danh sách nhận mail. ![](<../../../.gitbook/assets/image (3) (1).png>)
+    * "**Thêm người nhận**": Nhấn nút 'Thêm người nhận" để thêm người nhận vào danh sách nhận mail. ![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(3)%20(1).png?raw=true)
       * **Tên:** Nhập tên gợi nhớ của người nhận.
       * **Địa chỉ mail:** Nhập địa chỉ mail của người nhận.
       * Nhấn **'Thêm'** để hoàn tất quá trình

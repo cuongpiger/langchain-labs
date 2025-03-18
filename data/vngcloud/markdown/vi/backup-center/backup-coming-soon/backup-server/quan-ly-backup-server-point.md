@@ -7,7 +7,7 @@ Bài hướng dẫn này sẽ hướng dẫn bạn từng bước để thực h
 ### Xem danh sách backup server point
 
 1. Truy cập vào trang danh sách backup server tại đây: [https://backupcenter.console.vngcloud.vn/backup-server/list](https://backupcenter.console.vngcloud.vn/backup-server/list)
-2. Chọn Backup Server cần xem backup server point. Bạn có thể nhấn vào ô tìm kiếm, nhập tên backup server cần tìm. ![](<../../../.gitbook/assets/image (767).png>)
+2. Chọn Backup Server cần xem backup server point. Bạn có thể nhấn vào ô tìm kiếm, nhập tên backup server cần tìm. ![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(767).png?raw=true)
 3. Tại trang chi tiết của Backup Server, nhấn chọn tab Restore Point. Tại đây, bạn sẽ thấy danh sách các bản backup server point đã tạo. Thông tin bao gồm:
    1. **Backup Server Point ID** /Định danh backup server point
    2. **Estimated Backup Size** / Dung lượng bản backup

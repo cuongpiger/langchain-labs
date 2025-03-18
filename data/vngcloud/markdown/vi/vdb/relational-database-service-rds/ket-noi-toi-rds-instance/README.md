@@ -6,7 +6,7 @@ Tương tự, đối với **Postgresql**, bạn có thể dùng các client nh�
 
 Bạn có thể tham khảo video sau:
 
-{% embed url="https://youtu.be/1kvJi3Hg4wM" %}
+[Video](https://youtu.be/1kvJi3Hg4wM)
 
 Hoặc tham khảo bài viết hướng dẫn dưới đây. Bài viết này VNG Cloud sử dụng mysql-client, MySQL Workbench và psql:
 

@@ -6,9 +6,7 @@ Hướng dẫn này được thiết kế nhằm mục đích cung cấp cho ng�
 
 
 
-{% embed url="https://youtu.be/o4EOm0WCiJ0?si=GtDmJ_3-YqL8bIZ6" %}
-Hướng dẫn khởi tạo và quản lý Load Balancer
-{% endembed %}
+[Hướng dẫn khởi tạo và quản lý Load Balancer](https://youtu.be/o4EOm0WCiJ0?si=GtDmJ_3-YqL8bIZ6)
 
 ### Tổng quan về VNG Cloud load balancer 
 

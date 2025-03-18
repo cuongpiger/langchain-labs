@@ -2,9 +2,7 @@
 
 
 
-{% embed url="https://youtu.be/XKmOkwdyCLY?si=W-IQaOZuAjl1T_So" %}
-Hướng dẫn quản lý log tập trung với vMOnitor Platform Log
-{% endembed %}
+[Hướng dẫn quản lý log tập trung với vMOnitor Platform Log](https://youtu.be/XKmOkwdyCLY?si=W-IQaOZuAjl1T_So)
 
 vMonitor Platform Log là dịch vụ giúp thu thập dữ liệu Log của máy chủ, ứng dụng, hay các thiết bị từ hệ thống của doanh nghiệp theo thời gian thực. vMonitor Log được xây dựng dành cho người dùng, nhà phát triển, kĩ sư vận hành hay nhà quản lý IT nhằm mục đích lưu trữ, tìm kiếm, phân tích và hỗ trợ xử lý sự cố nhanh chóng trên những dữ liệu Log đã thu thập. Với vMonitor Platform Log, bạn có thể:
 

@@ -41,7 +41,7 @@ Chọn **My container** nếu bạn muốn chọn vStorage container thuộc s�
 4. Nhập **Access key** và **Secret key** để xác thực thông tin kết nối tới hệ thống vStorage. Bạn có thể tìm thấy **Access key** và **Secret key** theo hướng dẫn tại [Service Account](https://docs.vngcloud.vn/display/ONVINA/Service+Account) và [Sử dụng Service Account](https://docs.vngcloud.vn/pages/viewpage.action?pageId=49648950).
 5. Chọn **Select**.
 
-![](<../../../../.gitbook/assets/image (312).png>)
+![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(312).png?raw=true)
 
 * Custom container
 
@@ -50,7 +50,7 @@ Chọn **My container** nếu bạn muốn chọn vStorage container thuộc s�
 3. Nhập **Access key** và **Secret key** để xác thực thông tin kết nối tới hệ thống vStorage. Bạn có thể tìm thấy **Access key** và **Secret key** theo hướng dẫn tại [Service Account](https://docs.vngcloud.vn/display/ONVINA/Service+Account) và [Sử dụng Service Account](https://docs.vngcloud.vn/pages/viewpage.action?pageId=49648950).
 4. Chọn **Select**.
 
-![](<../../../../.gitbook/assets/image (313).png>)
+![](https://github.com/vngcloud/docs/blob/main/Vietnamese/.gitbook/assets/image%20(313).png?raw=true)
 
 </details>
 

@@ -6,7 +6,7 @@ Giải pháp lưu trữ linh hoạt, an toàn cùng với khả năng đáp ứn
 
 Video hướng dẫn khởi tạo project trên vStorage
 
-{% embed url="https://www.youtube.com/embed/qXwKdHFd7hk" %}
+[Video](https://www.youtube.com/embed/qXwKdHFd7hk)
 
 Về vStorage:
 
