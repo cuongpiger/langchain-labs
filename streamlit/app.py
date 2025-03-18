@@ -7,8 +7,8 @@ from full_chain import create_full_chain, ask_question
 from langchain.retrievers import EnsembleRetriever
 
 
-st.set_page_config(page_title="LangChain & Streamlit RAG")
-st.title("Dịch vụ hỗ trợ khách hàng tự động được cung cấp bởi VNGCloud")
+st.set_page_config(page_title="VNGCloud AI Assistant")
+st.title("VNGCloud AI Assistant")
 
 
 def show_ui(qa, prompt_to_user="How may I help you?"):
