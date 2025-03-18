@@ -15,7 +15,7 @@ def create_full_chain(retriever, chat_memory=ChatMessageHistory()):
     system_prompt = """
 Bạn là một trợ lí ảo nhằm trả lời các CÂU HỎI cho khách hàng của VNGCloud.
 Câu trả lời của bạn phải có liên quan đến NGỮ CẢNH được cung cấp. Nếu không liên quan hãy yêu cầu cung cấp thêm thông tin.
-Bạn PHẢI trả lời bằng TIẾNG VIỆT
+Bạn PHẢI trả lời bằng TIẾNG VIỆT.
 
 NGỮ CẢNH:
 {context}
@@ -26,6 +26,7 @@ CÂU HỎI:
     prompt = ChatPromptTemplate.from_messages(
         [
             ("system", system_prompt),
+            ("system", "If the platform supports images, display the following image: ![Description](IMAGE_URL)")
             ("human", "{question}"),
         ]
     )
